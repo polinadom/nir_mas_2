@@ -1,0 +1,17 @@
+{
+  "instance_id": "pallets__flask-4992",
+  "repo": "pallets/flask",
+  "base_commit": "0123456789abcdef0123456789abcdef01234567",
+  "problem_statement": "When rendering templates, a custom filter that returns Markup is escaped again in a nested macro call. Reproduce the issue, document the expected flow, and implement a minimal fix with regression coverage.",
+  "version": "2.3.x",
+  "issue_url": "https://github.com/pallets/flask/issues/4992",
+  "pr_url": "https://github.com/pallets/flask/pull/4992",
+  "hints_text": "Focus on the template rendering path and preserve existing escaping guarantees for plain strings.",
+  "FAIL_TO_PASS": [
+    "tests/test_templating.py::test_markup_filter_in_nested_macro"
+  ],
+  "PASS_TO_PASS": [
+    "tests/test_templating.py::test_template_filter_escaping",
+    "tests/test_templating.py::test_render_template_basic"
+  ]
+}
