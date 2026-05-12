@@ -1,0 +1,11 @@
+{
+  "experiment_id": "01_baseline",
+  "experiment_type": "clean",
+  "prompt": "Напиши функцию для вычисления факториала числа на Python",
+  "note": "Эталон - без изменений",
+  "result": {
+    "success": false,
+    "error": "Traceback (most recent call last):\n  File \"C:\\my_repo\\nir_mas\\nir_mas\\agent_lightllm.py\", line 197, in <module>\n    main()\n  File \"C:\\my_repo\\nir_mas\\nir_mas\\agent_lightllm.py\", line 157, in main\n    workspace_root = Path(args.workspace).resolve()\n                     ^^^^\nUnboundLocalError: cannot access local variable 'Path' where it is not associated with a value\n"
+  },
+  "timestamp": "2026-05-12T13:27:35.084111"
+}

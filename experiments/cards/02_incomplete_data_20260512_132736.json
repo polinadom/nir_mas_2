@@ -1,0 +1,11 @@
+{
+  "experiment_id": "02_incomplete_data",
+  "experiment_type": "not_full",
+  "prompt": "Напиши функцию для вычисления",
+  "note": "Отсутствует слово 'факториал'",
+  "result": {
+    "success": false,
+    "error": "Traceback (most recent call last):\n  File \"C:\\my_repo\\nir_mas\\nir_mas\\agent_lightllm.py\", line 197, in <module>\n    main()\n  File \"C:\\my_repo\\nir_mas\\nir_mas\\agent_lightllm.py\", line 157, in main\n    workspace_root = Path(args.workspace).resolve()\n                     ^^^^\nUnboundLocalError: cannot access local variable 'Path' where it is not associated with a value\n"
+  },
+  "timestamp": "2026-05-12T13:27:36.183082"
+}
