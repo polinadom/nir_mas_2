@@ -1,2 +1,7 @@
 "venv312/" 
 "logs/" 
+".env" 
+"logs/" 
+"venv312/" 
+"mas/__pycache__/" 
+"__pycache__/" 
