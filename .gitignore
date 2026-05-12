@@ -52,3 +52,8 @@ htmlcov/
 Thumbs.db
 .idea/
 .vscode/
+"venv312/" 
+"*.pyc" 
+"__pycache__/" 
+".env" 
+"logs/" 
