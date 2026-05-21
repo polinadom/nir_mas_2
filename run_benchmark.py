@@ -1,39 +1,97 @@
-import subprocess  # Позволяет запускать agent_lightllm.py из этого скрипта
-import json         # Сохраняем результаты в JSON
-import sys          # Доступ к Python (чтобы запускать тот же интерпретатор)
-from pathlib import Path  # Работа с путями к папкам (Windows/Linux)
-from datetime import datetime  # Добавляем время к именам файлов
+import subprocess  
+import json         
+import sys          
+from pathlib import Path  
+from datetime import datetime  
 
 
 EXPERIMENTS = [
-    # 1. Базовый
+    # эталонная задача 
+
     {
-        "id": "01_baseline",      # Уникальное имя файла
-        "type": "clean",           # Категория
-        "prompt": "Напиши функцию для вычисления факториала числа на Python",
-        "note": "Эталон - без изменений"
+        "id": "01_baseline",
+        "type": "clean",
+        "prompt": "Напиши функцию на Python, которая проверяет, является ли число простым",
+        "note": "Эталон — полное и чёткое описание задачи"
     },
+
     # 2. Неполнота
     {
-        "id": "02_incomplete_data",
-        "type": "not_full",
-        "prompt": "Напиши функцию для вычисления",  # <-- отличается от оригинала
-        "note": "Отсутствует слово 'факториал'"
+        "id": "02_incomplete_missing_details",
+        "type": "incomplete",
+        "prompt": "Напиши функцию на Python для проверки числа",
+        "note": "Отсутствует указание — что именно проверять (простое? чётное? положительное?)"
     },
-    # 3. Противоречие
     {
-        "id": "03_contradiction",
-        "type": "conflict",
-        "prompt": "Напиши функцию факториала, но не используй циклы и рекурсию",
-        "note": "Невозможно выполнить одновременно"
+        "id": "03_incomplete_no_language",
+        "type": "incomplete",
+        "prompt": "Напиши функцию для проверки простого числа",
+        "note": "Не указан язык программирования"
     },
-    # 4. Шум
     {
-        "id": "04_noise",
-        "type": "garbage",
-        "prompt": "Напиши [ШУМ] функцию факториала ^&*#@ на Python!!! asdf",
-        "note": "Мусорные символы в запросе"
-    }
+        "id": "04_incomplete_no_return",
+        "type": "incomplete",
+        "prompt": "Напиши программу про простые числа",
+        "note": "Не указано, нужна функция или скрипт, что возвращать"
+    },
+    
+
+    # 3. Противоречия
+
+    {
+        "id": "05_contradiction_impossible",
+        "type": "contradiction",
+        "prompt": "Напиши функцию на Python, которая одновременно использует цикл for и не использует циклы",
+        "note": "Прямое логическое противоречие"
+    },
+    {
+        "id": "06_contradiction_type_mismatch",
+        "type": "contradiction",
+        "prompt": "Напиши функцию, которая принимает строку и возвращает её квадратный корень из числа",
+        "note": "Тип не соответствует операции (корень из строки)"
+    },
+    {
+        "id": "07_contradiction_performance",
+        "type": "contradiction",
+        "prompt": "Напиши рекурсивную функцию для вычисления чисел Фибоначчи, которая работает за O(1) по времени",
+        "note": "Рекурсивный Фибоначчи не может быть O(1)"
+    },
+    
+
+    # 4. ШУМ 
+    {
+        "id": "08_noise_random_chars",
+        "type": "noise",
+        "prompt": "Напиши функцию [ШУМ] asdfghjkl для сортировки ^&*#@ списка на Python!!! qwerty",
+        "note": "Случайные символы в запросе"
+    },
+    {
+        "id": "09_noise_irrelevant_text",
+        "type": "noise",
+        "prompt": "Напиши функцию бинарного поиска. Кстати, сегодня хорошая погода. Завтра будет дождь. Не забудь купить хлеб. Верни индекс элемента.",
+        "note": "Посторонний текст, не относящийся к задаче"
+    },
+    {
+        "id": "10_noise_emoji",
+        "type": "noise",
+        "prompt": "🚀 Напиши 🔥 функцию для 🐍 реверса строки 😊 на Python 💻",
+        "note": "Эмодзи и спецсимволы"
+    },
+    
+
+    # 5. СМЕШАННЫЕ (несколько типов багов одновременно)
+    {
+        "id": "11_mixed_noise_incomplete",
+        "type": "mixed",
+        "prompt": "Напиши [ШУМ] asdf функцию для поиска ***",
+        "note": "Шум + неполнота (не указано, что искать)"
+    },
+    {
+        "id": "12_mixed_contradiction_noise",
+        "type": "mixed",
+        "prompt": "Напиши рекурсивный цикл ^&* для обхода дерева, но без рекурсии и циклов",
+        "note": "Противоречие + шум"
+    },
 ]
 
 
@@ -42,31 +100,29 @@ def run_agent(prompt: str) -> dict:
     """Запускает agent_lightllm.py и возвращает результат"""
     
     try:
-        # subprocess.run — запускает внешнюю команду
-        # sys.executable — путь к текущему Python (например, python.exe)
-        # ["python", "agent_lightllm.py", "--brief", prompt] — команда
+
         result = subprocess.run(
             [sys.executable, "agent_lightllm.py", "--brief", prompt],
-            capture_output=True,  # Ловим вывод программы
-            text=True,            # Как текст, а не байты
-            timeout=120           # Если дольше 2 минут — прерываем
+            capture_output=True, 
+            text=True,            
+            timeout=120          
         )
         
-        # Если программа завершилась без ошибок (returncode == 0)
+        
         if result.returncode == 0:
-            # Разбиваем вывод на строки
+            
             lines = result.stdout.strip().split('\n')
-            # Последняя строка — это JSON с ответом
+            
             json_line = lines[-1] if lines else "{}"
             try:
-                # Превращаем строку JSON в словарь Python
+                
                 data = json.loads(json_line)
                 return {"success": True, "data": data}
             except:
-                # Если JSON не получился, сохраняем как есть
+                
                 return {"success": True, "data": {"raw": result.stdout}}
         else:
-            # Ошибка: агент вернул код ошибки
+            
             return {"success": False, "error": result.stderr}
             
     except subprocess.TimeoutExpired:
@@ -108,34 +164,34 @@ def save_card(experiment: dict, result: dict) -> Path:
 
 def main():
     print("=" * 70)
-    print("🔬 БЕНЧМАРК ОТКАЗОУСТОЙЧИВОСТИ МУЛЬТИАГЕНТНЫХ СИСТЕМ")
+    print("БЕНЧМАРК ОТКАЗОУСТОЙЧИВОСТИ МУЛЬТИАГЕНТНЫХ СИСТЕМ")
     print("=" * 70)
-    print(f"📋 Всего экспериментов: {len(EXPERIMENTS)}")
-    print(f"📁 Результаты: experiments/cards/")
+    print(f"Всего экспериментов: {len(EXPERIMENTS)}")
+    print(f"Результаты: experiments/cards/")
     print("=" * 70)
     
     # Проходим по каждому эксперименту из списка
     # enumerate даёт номер (i) и сам эксперимент (exp)
     for i, exp in enumerate(EXPERIMENTS, 1):
-        # Выводим информацию о текущем эксперименте
-        print(f"\n[{i}/{len(EXPERIMENTS)}] 🔬 {exp['id']} - {exp['type']}")
-        print(f"    📝 {exp['note']}")
-        print(f"    💬 Промпт: {exp['prompt'][:80]}...")
         
-        # ЗАПУСКАЕМ агента с этим промптом
+        print(f"\n[{i}/{len(EXPERIMENTS)}] 🔬 {exp['id']} - {exp['type']}")
+        print(f"{exp['note']}")
+        print(f" Промпт: {exp['prompt'][:80]}...")
+        
+        
         result = run_agent(exp['prompt'])
         
-        # СОХРАНЯЕМ результат
+        
         filename = save_card(exp, result)
         
-        # Выводим статус
-        status = "✅ УСПЕХ" if result["success"] else "❌ ОШИБКА"
+        
+        status = "УСПЕХ" if result["success"] else "ОШИБКА"
         print(f"    {status} → {filename.name}")
     
     # Финальная сводка
     print("\n" + "=" * 70)
-    print("✅ Все эксперименты завершены!")
-    print("📂 Смотрите результаты в папке: experiments/cards/")
+    print("Все эксперименты завершены!")
+    print("Смотрите результаты в папке: experiments/cards/")
     print("=" * 70)
 
 

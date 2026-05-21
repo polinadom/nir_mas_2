@@ -1,0 +1,11 @@
+{
+  "experiment_id": "07_contradiction_performance",
+  "experiment_type": "contradiction",
+  "prompt": "Напиши рекурсивную функцию для вычисления чисел Фибоначчи, которая работает за O(1) по времени",
+  "note": "Рекурсивный Фибоначчи не может быть O(1)",
+  "result": {
+    "success": false,
+    "error": "Таймаут 120 секунд"
+  },
+  "timestamp": "2026-05-21T17:32:11.136192"
+}

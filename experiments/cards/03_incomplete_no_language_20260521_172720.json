@@ -1,0 +1,13 @@
+{
+  "experiment_id": "03_incomplete_no_language",
+  "experiment_type": "incomplete",
+  "prompt": "Напиши функцию для проверки простого числа",
+  "note": "Не указан язык программирования",
+  "result": {
+    "success": true,
+    "data": {
+      "raw": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот пример функции на Python для проверки, является ли число простым:\\n\\n```python\\nimport math\\n\\ndef is_prime(n):\\n    if n <= 1:\\n        return False\\n    if n == 2:\\n        return True\\n    if n % 2 == 0:\\n        return False\\n    max_divisor = math.isqrt(n) + 1  # Используем math.isqrt для более точного вычисления\\n    for i in range(3, max_divisor, 2):\\n        if n % i == 0:\\n            return False\\n    return True\\n```\\n\\n### Объяснение:\\n1. **Проверка тривиальных случаев**:\\n   - Если число `n <= 1`, оно не является простым.\\n   - Если `n == 2`, число простое.\\n   - Если `n` чётное и больше 2, оно не простое.\\n\\n2. **Вычисление максимального делителя**:\\n   - `max_divisor` устанавливается как `math.isqrt(n) + 1`, чтобы охватить все возможные делители до квадратного корня числа `n`.\\n\\n3. **Цикл проверки**:\\n   - Цикл проверяет нечётные числа от `3` до `max_divisor` на делимость `n`. Если делитель найден, число не простое.\\n\\n4. **Возврат результата**:\\n   - Если ни один делитель не найден, число простое.\\n\\n### Примеры использования:\\n```python\\nprint(is_prime(2))   # True\\nprint(is_prime(3))   # True\\nprint(is_prime(4))   # False\\nprint(is_prime(25))  # False\\nprint(is_prime(49))  # False\\nprint(is_prime(17))  # True\\n```\\n\\n### Дополнительные преимущества:\\n- Использование `math.isqrt` вместо `int(n**0.5)` делает код более читаемым и точным.\\n- Оптимизация с шагом `2` позволяет избежать проверки чётных чисел после начальной проверки.\",\n  \"timestamp\": \"2026-05-21T17:27:20.567321\",\n  \"workspace\": \"C:\\\\my_repo\\\\nir_mas\\\\nir_mas\\\\demo_workspace\"\n}\n"
+    }
+  },
+  "timestamp": "2026-05-21T17:27:20.719335"
+}

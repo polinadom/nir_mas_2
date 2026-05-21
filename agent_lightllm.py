@@ -15,12 +15,10 @@ from openai import OpenAI
 DEFAULT_BRIEF = "Build a simple multi-agent software delivery system with an architect and coder."
 
 
-# ============================================================
-# БЕЗОПАСНАЯ ПЕЧАТЬ (без эмодзи)
-# ============================================================
+
 
 def safe_print_json(data: dict) -> None:
-    """Безопасно печатает JSON, заменяя эмодзи и проблемные символы"""
+    
     json_str = json.dumps(data, ensure_ascii=False, indent=2)
     cleaned = re.sub(r'[^\u0400-\u04FF\u0020-\u007E\n\r\t.,!?:;()\-=+*#@/\\]', '', json_str)
     try:
@@ -29,9 +27,7 @@ def safe_print_json(data: dict) -> None:
         print(json_str.encode('ascii', 'ignore').decode('ascii'))
 
 
-# ============================================================
-# ЗАГЛУШКИ OPENHANDS
-# ============================================================
+#заглушка
 
 class OpenHandsRuntimeConfig:
     def __init__(self, model: str, api_key: str, base_url: str = None):
@@ -99,9 +95,7 @@ class SweBenchTask:
         return Task(path, instance_id)
 
 
-# ============================================================
-# ОСНОВНАЯ ФУНКЦИЯ
-# ============================================================
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -145,7 +139,7 @@ def main() -> None:
     with open(log_file, "w", encoding="utf-8") as f:
         json.dump(report_dict, f, ensure_ascii=False, indent=2)
     
-    # Печатаем безопасно
+    
     safe_print_json(report_dict)
 
 
