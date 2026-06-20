@@ -1,6 +1,0 @@
-{
-  "status": "success",
-  "result": "\n\n```python\ndef factorial(n):\n    \"\"\"\n    Вычисляет факториал числа n.\n\n    Параметры:\n    n (int): Неотрицательное целое число.\n\n    Возвращает:\n    int: Факториал числа n.\n\n    Исключения:\n    ValueError: Если n отрицательное.\n    \"\"\"\n    if n < 0:\n        raise ValueError(\"Факториал не определен для отрицательных чисел.\")\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result\n```",
-  "timestamp": "2026-05-26T16:10:47.669912",
-  "workspace": "C:\\my_repo\\nir_mas\\nir_mas\\demo_workspace"
-}
