@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Отчёт об отказоустойчивости MAS</title>
+<style>
+  body { font-family: Segoe UI, Arial, sans-serif; margin: 32px; color: #1a1a1a; }
+  h1 { font-size: 22px; }
+  .stats { display: flex; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
+  .stat { background: #f3f4f6; border-radius: 10px; padding: 14px 20px; }
+  .stat b { font-size: 22px; display: block; }
+  table { border-collapse: collapse; margin: 16px 0; }
+  td, th { border: 1px solid #ddd; padding: 8px 14px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+  .card img { width: 100%; border: 1px solid #eee; border-radius: 10px; }
+  .legend span { display:inline-block; padding:2px 8px; border-radius:6px; color:#fff; margin-right:8px; }
+</style>
+</head>
+<body>
+  <h1>Тестирование отказоустойчивости мультиагентной системы</h1>
+  <p>в условиях неполной, противоречивой и шумной информации</p>
+
+  <div class="stats">
+    <div class="stat"><b>288</b>баговых экспериментов</div>
+    <div class="stat"><b>98%</b>успешных запусков MAS</div>
+    <div class="stat"><b>32</b>уникальных задач</div>
+  </div>
+
+  <h2>Сводная таблица падения качества (%)</h2>
+  <table>
+    <tr><th>Тип бага</th><th>Низкий</th><th>Средний</th><th>Высокий</th></tr>
+    <tr><td><b>Неполнота</b></td><td style="background:#2e7d32;color:#fff;text-align:center">8.2%</td><td style="background:#2e7d32;color:#fff;text-align:center">13.2%</td><td style="background:#2e7d32;color:#fff;text-align:center">19.5%</td></tr>
+<tr><td><b>Шум</b></td><td style="background:#2e7d32;color:#fff;text-align:center">10.1%</td><td style="background:#2e7d32;color:#fff;text-align:center">7.5%</td><td style="background:#2e7d32;color:#fff;text-align:center">9.7%</td></tr>
+<tr><td><b>Противоречие</b></td><td style="background:#2e7d32;color:#fff;text-align:center">12.8%</td><td style="background:#2e7d32;color:#fff;text-align:center">16.7%</td><td style="background:#2e7d32;color:#fff;text-align:center">13.6%</td></tr>
+  </table>
+  <p class="legend">
+    <span style="background:#2e7d32">&lt; 20% — устойчива</span>
+    <span style="background:#f9a825">20–50% — средняя уязвимость</span>
+    <span style="background:#c62828">&gt; 50% — уязвима</span>
+  </p>
+
+  <h2>Графики</h2>
+  <div class="grid">
+    <div class="card"><img src="heatmap_degradation.png" alt="heatmap_degradation.png"></div>
+<div class="card"><img src="bars_by_bugtype.png" alt="bars_by_bugtype.png"></div>
+<div class="card"><img src="robustness_share.png" alt="robustness_share.png"></div>
+<div class="card"><img src="quality_baseline_vs_bug.png" alt="quality_baseline_vs_bug.png"></div>
+  </div>
+</body>
+</html>

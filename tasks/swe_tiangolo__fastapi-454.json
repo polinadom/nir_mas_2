@@ -1,0 +1,19 @@
+{
+  "id": "tiangolo__fastapi-454",
+  "name": "SWE-bench: tiangolo__fastapi-454",
+  "prompt": "Add support for Pydantic's dataclasses\n**Describe the question**\r\nI am using a  pydantic.dataclasses.dataclass as a response_model of my fast api route.\r\n\r\n\r\n```\r\nfrom fastapi import FastAPI\r\nfrom pydantic.dataclasses import dataclass\r\n\r\n\r\n@dataclass\r\nclass Foo:\r\n    bar: int\r\n\r\napp = FastAPI()\r\n\r\n@app.get('/foo', response_model=Foo)\r\ndef get_bar() -> Foo:\r\n    return Foo(bar=1)\r\n```\r\n\r\n**To Reproduce**\r\nSteps to reproduce the behavior:\r\n1. Create a file **app.py** with the above code.\r\n2. Start the app: `uvicorn app:app`\r\n3. Open the browser and go to **localhost:8000/foo**\r\n4. See error: \r\n```\r\npydantic.error_wrappers.ValidationError: 1 validation error\r\nresponse\r\n  __init__() got an unexpected keyword argument '__initialised__' (type=type_error)\r\n```\r\n\r\n**Expected behavior**\r\nNo validation error and serialized json does not contain any keys `__initialised__`.\r\n\r\n\r\n**Environment:**\r\n - OS: Linux\r\n - FastAPI Version 0.25.0\r\n- Python version 3.7.3\r\n\n",
+  "keywords": [
+    "fix",
+    "bug",
+    "implement",
+    "change",
+    "update"
+  ],
+  "difficulty": "hard",
+  "category": "swe_bench",
+  "swe_metadata": {
+    "repo": "tiangolo/fastapi",
+    "base_commit": "033bc2a6c9aec3a245eb1f1b4fadb2fbb7a514b8",
+    "patch": "diff --git a/fastapi/utils.py b/fastapi/utils.py\n--- a/fastapi/utils.py\n+++ b/fastapi/utils.py\n@@ -1,4 +1,5 @@\n import re\n+from dataclasses import is_dataclass\n from typing import Any, Dict, List, Sequence, Set, Type, cast\n \n from fastapi import routing\n@@ -52,6 +53,8 @@ def get_path_param_names(path: str) -> Set[str]:\n \n def create_cloned_field(field: Field) -> Field:\n     original_type = field.type_\n+    if is_dataclass(original_type) and hasattr(original_type, \"__pydantic_model__\"):\n+        original_type = original_type.__pydantic_model__  # type: ignore\n     use_type = original_type\n     if lenient_issubclass(original_type, BaseModel):\n         original_type = cast(Type[BaseModel], original_type)\n"
+  }
+}

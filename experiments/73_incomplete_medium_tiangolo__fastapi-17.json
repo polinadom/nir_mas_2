@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_medium_tiangolo__fastapi-17",
+  "task_id": "tiangolo__fastapi-17",
+  "task_name": "SWE-bench: tiangolo__fastapi-17",
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "starlette update breaks routing [starlette routing working around by enforcing starlette==0.9.10 ...",
+  "success": true,
+  "response": "```python\n\"\"\"\nstarlette_compat.py\n\nCompatibility wrapper for Starlette routing issues introduced after version 0.10.\nEnforces Starlette==0.9.10 (or provides a minimal fallback) and demonstrates\nbasic routing usage.\n\nUsage:\n    $ pip install \"starlette==0.9.10\"\n    $ python starlette_compat.py\n\"\"\"\n\nimport sys\nfrom typing import Callable, List\n\n# --------------------------------------------------------------------------- #\n# Version enforcement\n# --------------------------------------------------------------------------- #\ndef _ensure_starlette_version(expected: str = \"0.9.10\") -> None:\n    \"\"\"Raise RuntimeError if the installed Starlette version does not match.\"\"\"\n    try:\n        # Python 3.8+: importlib.metadata, else use importlib_metadata backport\n        try:\n            from importlib.metadata import version, PackageNotFoundError\n        except ImportError:  # pragma: no cover\n            from importlib_metadata import version, PackageNotFoundError  # type: ignore\n        installed = version(\"starlette\")\n    except PackageNotFoundError as exc:  # pragma: no cover\n        raise RuntimeError(\"Starlette is not installed.\") from exc\n\n    if installed != expected:\n        raise RuntimeError(\n            f\"Incompatible Starlette version: {installed}. \"\n            f\"Please install starlette=={expected}.\"\n        )\n\n\n# --------------------------------------------------------------------------- #\n# Compatibility router (works around known 0.10+ bug)\n# --------------------------------------------------------------------------- #\ndef _create_router() -> \"Router\":  # type: ignore[name-defined]\n    \"\"\"Create a Router instance compatible with the enforced Starlette version.\"\"\"\n    from starlette.routing import Router, Route\n\n    # Simple health‑check endpoint\n    async def health(request):\n        return JSONResponse({\"status\": \"ok\"})\n\n    # Example endpoint that echoes a path parameter\n    async def greet(request):\n        name = request.path_params.get(\"name\", \"world\")\n        return JSONResponse({\"message\": f\"Hello, {name}!\"})\n\n    routes: List[Route] = [\n        Route(\"/health\", endpoint=health, methods=[\"GET\"]),\n        Route(\"/greet/{name}\", endpoint=greet, methods=[\"GET\"]),\n    ]\n\n    # The Router constructor signature changed in later versions; we keep it minimal.\n    return Router(routes=routes)\n\n\n# --------------------------------------------------------------------------- #\n# Application factory\n# --------------------------------------------------------------------------- #\ndef create_app() -> \"Starlette\":  # type: ignore[name-defined]\n    \"\"\"Return a Starlette app with the compatibility router attached.\"\"\"\n    from starlette.applications import Starlette\n    from starlette.responses import JSONResponse\n\n    _ensure_starlette_version()  # enforce version before importing anything else\n    router = _create_router()\n    return Starlette(debug=True, routes=router.routes)\n\n\n# ------------------------------------------------------------------------",
+  "error": null,
+  "baseline_quality": 0.6,
+  "buggy_quality": 0.5,
+  "quality_loss_percent": 16.7,
+  "is_robust": true,
+  "response_length": 3864,
+  "elapsed_time": 114.40174174308777,
+  "timestamp": "2026-06-19T20:04:14.411409"
+}

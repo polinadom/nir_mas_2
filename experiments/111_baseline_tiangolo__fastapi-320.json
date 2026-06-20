@@ -1,0 +1,31 @@
+{
+  "experiment_id": "baseline_tiangolo__fastapi-320",
+  "task": {
+    "id": "tiangolo__fastapi-320",
+    "name": "SWE-bench: tiangolo__fastapi-320",
+    "prompt": "eta on pydantic update to 0.28\nreally need your latest PR \r\nit shoud solve recurring issues with sqlalchemy to pydantic mapping\r\nthank you !\n",
+    "keywords": [
+      "fix",
+      "bug",
+      "implement",
+      "change",
+      "update"
+    ],
+    "difficulty": "hard",
+    "category": "swe_bench",
+    "swe_metadata": {
+      "repo": "tiangolo/fastapi",
+      "base_commit": "c26f1760d474f8240d2311ae16a9f17c9fbbae9b",
+      "patch": "diff --git a/fastapi/utils.py b/fastapi/utils.py\n--- a/fastapi/utils.py\n+++ b/fastapi/utils.py\n@@ -28,7 +28,7 @@ def get_flat_models_from_routes(\n             if route.response_fields:\n                 responses_from_routes.extend(route.response_fields.values())\n     flat_models = get_flat_models_from_fields(\n-        body_fields_from_routes + responses_from_routes\n+        body_fields_from_routes + responses_from_routes, known_models=set()\n     )\n     return flat_models\n \n"
+    }
+  },
+  "bug_type": "none",
+  "intensity": "none",
+  "clean_prompt": "eta on pydantic update to 0.28\nreally need your latest PR \r\nit shoud solve recurring issues with sqlalchemy to pydantic mapping\r\nthank you !\n",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: eta on pydantic update to 0.28\nreally need your latest PR \r\nit shoud solve ...",
+  "error": null,
+  "quality_score": 0.15000000000000002,
+  "response_length": 137,
+  "timestamp": "2026-06-19T21:13:41.242317"
+}

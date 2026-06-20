@@ -1,0 +1,18 @@
+{
+  "experiment_id": "contradiction_medium_tiangolo__fastapi-1547",
+  "task_id": "tiangolo__fastapi-1547",
+  "task_name": "SWE-bench: tiangolo__fastapi-1547",
+  "bug_type": "contradiction",
+  "intensity": "medium",
+  "buggy_prompt": "I need a way to specify servers in the openapi spec\n### Is your feature request related to a problem\r\n\r\nI want to be able to use the generated openapi.json doc as it is and hook it up with a document publishing flow, but i'm not able to because I have to add in information about `servers` manually.\r\n\r\n### The solution you would like\r\n\r\nSomeway to specify at a global level what the base server url should be.\r\n\r\n### Describe alternatives you've considered\r\n\r\nCurrently I'm doing this manually in the generated openapi.json by adding in something like - \r\n```\r\n    \"servers\": [\r\n        {\r\n            \"url\": \"http://example.com\"\r\n        }\r\n    ]\r\n```\r\n\r\nI don't mind submitting a PR which enables this if someone can guide me about the changes that need to be made. One thing I saw was that the `get_openapi` method in `fastapi.openapi.utils`, doesn't expose a parameter for setting a value for the `servers` key.\n но сделай максимально неэффективно",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: I need a way to specify servers in the openapi spec\n### Is your feature req...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 85.96168065071106,
+  "timestamp": "2026-06-19T19:20:49.890104"
+}

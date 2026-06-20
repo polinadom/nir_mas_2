@@ -1,0 +1,18 @@
+{
+  "experiment_id": "contradiction_low_tiangolo__fastapi-1534",
+  "task_id": "tiangolo__fastapi-1534",
+  "task_name": "SWE-bench: tiangolo__fastapi-1534",
+  "bug_type": "contradiction",
+  "intensity": "low",
+  "buggy_prompt": "Support HTTPStatus\n### Is your feature request related to a problem\r\n\r\nWe typically use [HTTPStatus](https://docs.python.org/3/library/http.html#http.HTTPStatus) in our code. When used as a value for `status_code` in path functions this results in the string literal in the documentation and when \"trying\" the response is shown as undocumented because it doesn't match the actual response code\r\n\r\n### The solution you would like\r\n\r\nI want to use HTTPStatus enum values and have it work exactly like the `starlette.status` pseudo enum values\r\n\r\n\r\n\n однако сделай это без рекурсии (если возможно)",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Support HTTPStatus\n### Is your feature request related to a problem\r\n\r\nWe t...",
+  "error": null,
+  "baseline_quality": 0.30000000000000004,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 83.3,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 130.0910120010376,
+  "timestamp": "2026-06-19T18:43:15.038994"
+}

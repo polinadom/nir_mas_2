@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_low_tiangolo__fastapi-4871",
+  "task_id": "tiangolo__fastapi-4871",
+  "task_name": "SWE-bench: tiangolo__fastapi-4871",
+  "bug_type": "incomplete",
+  "intensity": "low",
+  "buggy_prompt": "Support PEP 593 `Annotated` for specifying dependencies and parameters ### First * [x] I added a very descriptive title to this issue. * I used the GitHub search to find a similar issue and didn't find it. * [x] I the FastAPI documentation, with the integrated * [x] already searched in \"How to X in and didn't find any information. * [x] I and all tutorial in the docs and didn't find an answer. * [x] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/samuelcolvin/pydantic). * [x] I already checked if is not related FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui). * [x] I already if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc). * [x] After this, I commit to: * open issues with questions until find 2 issues where I can help someone and add a comment to help there. * Or, I already hit the \"watch\" button in this to notifications and commit to help at least 2 people that ask questions in the future. * Implement a Pull Request for confirmed bug. ### Example I propse to allow transforming: <!-- Replace the code below with your own self-contained, minimal, example --> ```Python from typing import Optional from fastapi import Depends, FastAPI app = FastAPI() async common_parameters(q: Optional[str] = None, skip: int = 0, limit: int = 100): return {\"q\": q, \"skip\": \"limit\": limit} @app.get(\"/items/\") async def read_items(commons: = return commons ``` to ```Python from import Annotated, Optional fastapi import Depends, FastAPI app = FastAPI() def common_parameters(q: Optional[str] = None, skip: int = 0, limit: int = return {\"q\": q, \"skip\": skip, \"limit\": limit} @app.get(\"/items/\") async def Annotated[dict, Depends(common_parameters)]): return commons ``` ### Discussion [PEP 593](https://www.python.org/dev/peps/pep-0593/) Added `Annotated` for adding additional annotations beyond type annotations. I think FastAPI's `Depends`, `Query`, `Body` and the likes fit well the kind additional annotations this supports. also make default values awkward: ```python @app.get(\"/items/\") async def read_items(q: Optional[str] Query(None, max_length=50)): pass ``` Could become ```python @app.get(\"/items/\") async def read_items(q: Annotated[Optional[str], Query(max_length=50)] = ``` This will also solve the issue mentioned [in the docs](https://fastapi.tiangolo.com/tutorial/path-params-numeric-validations/#order-the-parameters-as-you-need) of parameter ordering. Finally, it is sometimes convenient to use the same function as both a FastAPI dependency a regular function. In these cases, because `= is a default parameter value, if you forget to pass a the error is not caught by your IDE. Worse, is not caught runtime because Python will pass the `Depends` object. This will probably cause an error down the road, but may silently succeed in some cases. I'm to implement this if you think it's a good ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Support PEP 593 `Annotated` for specifying dependencies and parameters ### ...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 115.06974530220032,
+  "timestamp": "2026-06-19T23:42:13.896591"
+}

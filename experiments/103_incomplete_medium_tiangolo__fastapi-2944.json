@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_medium_tiangolo__fastapi-2944",
+  "task_id": "tiangolo__fastapi-2944",
+  "task_name": "SWE-bench: tiangolo__fastapi-2944",
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "Support starlette \"lifespan\" for First check * added a descriptive this issue. * used GitHub search to find issue and didn't find [x] FastAPI documentation, integrated search. [x] already searched Google \"How to X in FastAPI\" and didn't find any information. * I already read followed all the tutorial the docs didn't an answer. * I checked it is not related to FastAPI to [Pydantic](https://github.com/samuelcolvin/pydantic). * [x] I already it is related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui). * [x] I checked if it is related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc). [x] submitting this, I commit to: issues until I find 2 issues where can help someone a comment to there. Or, already hit the button in repository receive and I commit help people that questions the future. * a Pull Request for a confirmed <!-- asking all this because answering questions and solving issues consumes a time. I end up not able to add new bugs, Pull Requests, etc. as I I have to too much time handling All on of all the help provided by bunch of community members that lot of their time come here and others. That's a lot of they are doing, but if FastAPI users help others like them just a would be much less effort for (and and me 😅). ### Description Starlette added support for lifespan context function in 0.13.5. It's well the does ```python # The lifespan context function is a newer style that # on_startup / on_shutdown Use or the other, not both. ``` For purposes, more to (async)contextmanager the and shutdown events my would be nice have ### solution you would like I'd like easier and one that's officially supported, use lifespan context function. fastapi import FastAPI async def print(\"startup\") async with yield print(\"shutdown\") app = FastAPI(lifespan=lifespan) ``` or ```Python fastapi import FastAPI app = FastAPI() @app.lifespan async def lifespan(app): async with SomeResource(): print(\"shutdown\") ``` ### alternatives considered I can already accomplish this simply by FastAPI async lifespan(app): print(\"startup\") async with SomeResource(): yield app = app.router.lifespan_context = lifespan ``` supported and if accidentally `app.on_event` in addition. One could also do nasty stuff `__aenter__` and `__aexit__`: ```python from import FastAPI app @app.on_event(\"startup\") async startup() app.state.resource = app.state.resource.__aenter__() @app.on_event(\"shutdown\") async def startup() print(\"shutdown\") await app.state.resource.__aexit__(None, None, None) ``` but that seems ugly me. OS: Linux FastAPI Version: 0.63.0 * version: [пропущено]",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Support starlette \"lifespan\" for First check * added a descriptive this iss...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 127.68986535072327,
+  "timestamp": "2026-06-19T20:58:59.006850"
+}

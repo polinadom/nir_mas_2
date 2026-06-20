@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_low_tiangolo__fastapi-3372",
+  "task_id": "tiangolo__fastapi-3372",
+  "task_name": "SWE-bench: tiangolo__fastapi-3372",
+  "bug_type": "incomplete",
+  "intensity": "low",
+  "buggy_prompt": "Trio - Python library for async concurrency and I/O **Description** Hello! I'm using Hypercorn with uvloop. I'd like use Hypercorn with trio, but the program doesn't start i switch uvloop trio. you have plans to implement trio? PS: Nice work. [пропущено]",
+  "success": true,
+  "response": "```python\nimport sys\nfrom pathlib import Path\nfrom typing import Any, Callable, Dict, List, Optional\n\nimport trio\nfrom hypercorn.config import Config as HypercornConfig\nfrom hypercorn.trio import serve\nfrom hypercorn.typing import ASGIFramework\n\n\nclass SimpleASGIApp:\n    \"\"\"\n    Minimal ASGI application that returns a JSON response.\n    \"\"\"\n\n    async def __call__(\n        self,\n        scope: Dict[str, Any],\n        receive: Callable[[], Any],\n        send: Callable[[Dict[str, Any]], Any],\n    ) -> None:\n        if scope[\"type\"] != \"http\":\n            return\n\n        # Consume request body (if any) to avoid protocol errors.\n        while True:\n            message = await receive()\n            if message[\"type\"] == \"http.request\" and not message.get(\"more_body\", False):\n                break\n\n        response_body = b'{\"message\": \"Hello, world!\"}'\n        headers = [(b\"content-type\", b\"application/json\")]\n\n        await send(\n            {\n                \"type\": \"http.response.start\",\n                \"status\": 200,\n                \"headers\": headers,\n            }\n        )\n        await send(\n            {\n                \"type\": \"http.response.body\",\n                \"body\": response_body,\n                \"more_body\": False,\n            }\n        )\n\n\ndef build_hypercorn_config(\n    bind: List[str],\n    workers: int = 1,\n    loglevel: str = \"info\",\n    use_reloader: bool = False,\n) -> HypercornConfig:\n    \"\"\"\n    Create a Hypercorn configuration object.\n    \"\"\"\n    config = HypercornConfig()\n    config.bind = bind\n    config.workers = workers\n    config.loglevel = loglevel\n    config.use_reloader = use_reloader\n    config.worker_class = \"trio\"\n    return config\n\n\nasync def run_server(app: ASGIFramework, config: HypercornConfig) -> None:\n    \"\"\"\n    Run the ASGI application with Hypercorn using Trio.\n    \"\"\"\n    try:\n        await serve(app, config)\n    except Exception as exc:  # pragma: no cover\n        # Log the exception to stderr; in production replace with proper logging.\n        print(f\"Server stopped with error: {exc}\", file=sys.stderr)\n        raise\n\n\ndef main() -> None:\n    \"\"\"\n    Entry point: configure and start the server.\n    \"\"\"\n    # Example configuration – can be overridden via CLI arguments or env vars.\n    bind_addresses = [\"127.0.0.1:8000\"]\n    config = build_hypercorn_config(bind=bind_addresses, workers=1, loglevel=\"debug\")\n\n    app = SimpleASGIApp()\n\n    # Run the server inside Trio's event loop.\n    try:\n        trio.run(run_server, app, config)\n    except KeyboardInterrupt:\n        print(\"\\nServer shutdown requested by user.\", file=sys.stderr)\n    except Exception as exc:  # pragma: no cover\n        print(f\"Unexpected error: {exc}\", file=sys.stderr)\n        sys.exit(1)\n\n\nif __name__ == \"__main__\":\n    main()\n```",
+  "error": null,
+  "baseline_quality": 0.30000000000000004,
+  "buggy_quality": 0.39999999999999997,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 2785,
+  "elapsed_time": 111.15396094322205,
+  "timestamp": "2026-06-19T21:32:54.209121"
+}

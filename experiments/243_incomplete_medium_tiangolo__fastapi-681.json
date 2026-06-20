@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_medium_tiangolo__fastapi-681",
+  "task_id": "tiangolo__fastapi-681",
+  "task_name": "SWE-bench: tiangolo__fastapi-681",
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "Async class method raises a ValueError **Describe the If you use method as a `ValueError` is thrown. It doesn't for a non-async method. Complete `ValueError: [KeyError(<class TypeError(\"'coroutine' not iterable\"), TypeError('vars() argument __dict__ attribute')]` (at `fastapi/encoders.py:106`) Reproduce** ```py from fastapi import Depends, FastAPI import Request class DependencyClass: async async_dep(self, request: def request: Request): True app = dependency = DependencyClass() Error def async_dep(r=Depends(dependency.async_dep)): is fine @app.get('/sync-dep') def **Expected behavior** The async class method should be its return value injected. **Environment:** - macOS - FastAPI Version: 0.42.0 Python 3.7.2 context** I believe the comes from here: https://github.com/tiangolo/fastapi/blob/65536cbf63318d111bf608960378d651b6c1596a/fastapi/dependencies/utils.py#L353-L359 Indeed, will return `False` in of a class method. Hence, [sent to `run_in_threadpool`](https://github.com/tiangolo/fastapi/blob/65536cbf63318d111bf608960378d651b6c1596a/fastapi/dependencies/utils.py#L453-L456), which awaits coroutine, and we end up trying to it instead its result (hence the Changing check by: ```py if inspect.isfunction(call) or ``` the can a PR with the fix tests if it [неполные данные]",
+  "success": true,
+  "response": "```python\nimport asyncio\nfrom typing import Any\n\n\nclass AsyncValidator:\n    \"\"\"Async class with a method that validates input and may raise ValueError.\"\"\"\n\n    @classmethod\n    async def validate(cls, value: Any) -> bool:\n        \"\"\"\n        Asynchronously validate ``value``.\n\n        Raises:\n            ValueError: If ``value`` does not meet validation criteria.\n        \"\"\"\n        await asyncio.sleep(0)  # simulate async work\n\n        # Example validation rule: value must be a non‑empty string\n        if not isinstance(value, str) or not value.strip():\n            raise ValueError(\"Value must be a non‑empty string.\")\n\n        return True\n\n\nasync def main() -> None:\n    \"\"\"Demonstrate usage of ``AsyncValidator.validate`` with error handling.\"\"\"\n    test_values = [\"hello\", \"\", 123, \"   world   \"]\n\n    for val in test_values:\n        try:\n            result = await AsyncValidator.validate(val)\n            print(f\"'{val}' is valid: {result}\")\n        except ValueError as exc:\n            print(f\"Validation failed for '{val}': {exc}\")\n\n\nif __name__ == \"__main__\":\n    asyncio.run(main())\n```",
+  "error": null,
+  "baseline_quality": 0.39999999999999997,
+  "buggy_quality": 0.30000000000000004,
+  "quality_loss_percent": 25.0,
+  "is_robust": false,
+  "response_length": 1104,
+  "elapsed_time": 97.11380743980408,
+  "timestamp": "2026-06-20T01:15:49.045374"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "sorting",
+  "name": "Сортировка списка",
+  "prompt": "Напиши функцию для сортировки списка чисел на Python",
+  "keywords": ["сортировка", "sort", "def", "return", "список", "list"],
+  "difficulty": "medium",
+  "category": "algorithm",
+  "expected_output": "function that returns sorted list"
+}

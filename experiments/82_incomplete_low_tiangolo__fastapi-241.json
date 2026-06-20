@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_low_tiangolo__fastapi-241",
+  "task_id": "tiangolo__fastapi-241",
+  "task_name": "SWE-bench: tiangolo__fastapi-241",
+  "bug_type": "incomplete",
+  "intensity": "low",
+  "buggy_prompt": "swagger_ui_html, redoc_html and openapi.json handled by function? **Is feature request to a Please describe.** I add a loop on all router of my app to check if handler are all coroutine function to get performance, but I fount that redoc_html and openapi.json are handled by normal function. https://github.com/tiangolo/fastapi/blob/56ab106bbbf8054af437821c6683491ca7952c3b/fastapi/applications.py#L80-L86 **Describe the solution you'd like** I'm wondering if its possible handle these 3 router with async function, as its only a simple `getattr` operator or concat https://github.com/tiangolo/fastapi/blob/56ab106bbbf8054af437821c6683491ca7952c3b/fastapi/applications.py#L78 setup(self) -> None: self.openapi_url: async openapi_handler(req): return JSONResponse(self.openapi()) self.add_route( self.openapi_url, openapi_handler, include_in_schema=False, ) ``` **Describe alternatives you've considered** Disable default and I write async handlers by my self to replace inner handlers. **Additional context** In `Starlette`, if a handler is not coroutine function, it will be executed by `loop.run_in_executor` . So this could improve performance a litte bit.(In my test, about 2800 r/s to 3200r/s) [пропущено]",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: swagger_ui_html, redoc_html and openapi.json handled by function? **Is feat...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 127.19672656059265,
+  "timestamp": "2026-06-19T20:20:59.021590"
+}

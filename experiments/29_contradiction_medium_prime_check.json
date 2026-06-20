@@ -1,0 +1,31 @@
+{
+  "experiment_id": "contradiction_medium_prime_check",
+  "task": {
+    "id": "prime_check",
+    "name": "Проверка простого числа",
+    "prompt": "Напиши функцию для проверки, является ли число простым на Python",
+    "keywords": [
+      "простое",
+      "prime",
+      "def",
+      "return",
+      "True",
+      "False"
+    ],
+    "difficulty": "easy",
+    "category": "math",
+    "expected_output": "function that returns boolean"
+  },
+  "bug_type": "contradiction",
+  "intensity": "medium",
+  "buggy_prompt": "Напиши функцию для проверки, является ли число простым на Python однако программа не должна ничего возвращать",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\n```python\\nimport math\\n\\ndef check_prime(n):\\n    if n <= 1:\\n        print(f\\\"{n} не является простым числом.\\\")\\n        return\\n    if n == 2:\\n        print(f\\\"{n} является простым числом.\\\")\\n        return\\n    if n % 2 == 0:\\n        print(f\\\"{n} не является простым числом.\\\")\\n        return\\n    for i in range(3, int(math.sqrt(n)) + 1, 2):\\n        if n % i == 0:\\n            print(f\\\"{n} не является простым числом.\\\")\\n            return\\n    print(f\\\"{n} является простым числом.\\\")\\n```\\n\\n### Описание:\\nФункция `check_prime(n)` проверяет, является ли число `n` простым. Если число не является простым, она выводит соответствующее сообщение. Если число простое, функция также выводит сообщение об этом, но **не возвращает никакого значения**. \\n\\n### Особенности:\\n- Проверяет, является ли `n <= 1`, в таком случае число не может быть простым.\\n- Для числа `2` сразу возвращает сообщение о простоте.\\n- Если `n` чётное и больше 2, число не является простым.\\n- Использует цикл от `3` до квадратного корня из `n` с шагом `2`, чтобы проверить наличие делителей.\\n- Выводит результат на экран без использования оператора `return`.\\n\\n### Примеры:\\n```python\\ncheck_prime(7)   # 7 является простым числом.\\ncheck_prime(10)  # 10 не является простым числом.\\ncheck_prime(1)   # 1 не является простым числом.\\ncheck_prime(2)   # 2 является простым числом.\\n```\",\n  \"timestamp\": \"2026-05-26T16:21:14.650921\",\n  \"workspace\": \"C:\\\\my_repo\\\\nir_mas\\\\nir_mas\\\\demo_workspace\"\n}\n",
+  "error": null,
+  "baseline_quality": 1.0,
+  "buggy_quality": 0.75,
+  "quality_loss_percent": 25.0,
+  "is_robust": false,
+  "response_length": 1527,
+  "timestamp": "2026-05-26T16:21:14.804840"
+}

@@ -1,0 +1,31 @@
+{
+  "experiment_id": "contradiction_medium_sorting",
+  "task": {
+    "id": "sorting",
+    "name": "Сортировка списка",
+    "prompt": "Напиши функцию для сортировки списка чисел на Python",
+    "keywords": [
+      "сортировка",
+      "sort",
+      "def",
+      "return",
+      "список",
+      "list"
+    ],
+    "difficulty": "medium",
+    "category": "algorithm",
+    "expected_output": "function that returns sorted list"
+  },
+  "bug_type": "contradiction",
+  "intensity": "medium",
+  "buggy_prompt": "Напиши функцию для сортировки списка чисел на Python однако программа не должна ничего возвращать",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот функция, которая сортирует переданный список чисел **по возрастанию**, используя встроенный метод `list.sort()`. Поскольку списки в Python изменяемы, изменения будут применены к оригинальному списку, и функция не возвращает ничего, как требуется:\\n\\n```python\\ndef sort_numbers(nums):\\n    nums.sort()\\n```\\n\\n### Пример использования:\\n\\n```python\\nnumbers = [5, 2, 9, 1, 5, 6]\\nsort_numbers(numbers)\\nprint(numbers)  # Вывод: [1, 2, 5, 5, 6, 9]\\n```\\n\\n### Важные моменты:\\n1. **Изменение списка на месте**: Метод `list.sort()` изменяет переданный список **непосредственно**, не создавая копию.\\n2. **Порядок сортировки**: По умолчанию сортировка происходит в порядке **возрастания**. Если нужно изменить порядок на убывание, можно добавить параметр `reverse=True` в `nums.sort(reverse=True)`.\\n3. **Ничего не возвращается**: Функция не имеет `return`, что соответствует требованиям задачи.\\n\\nТаким образом, реализация соответствует всем условиям задачи: она сортирует список чисел и ничего не возвращает.\",\n  \"timestamp\": \"2026-05-26T16:27:59.892690\",\n  \"workspace\": \"C:\\\\my_repo\\\\nir_mas\\\\nir_mas\\\\demo_workspace\"\n}\n",
+  "error": null,
+  "baseline_quality": 1.0,
+  "buggy_quality": 1.0,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 1167,
+  "timestamp": "2026-05-26T16:28:00.059445"
+}

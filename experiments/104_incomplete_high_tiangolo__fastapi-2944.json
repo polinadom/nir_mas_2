@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_high_tiangolo__fastapi-2944",
+  "task_id": "tiangolo__fastapi-2944",
+  "task_name": "SWE-bench: tiangolo__fastapi-2944",
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "context for application check [x] I added very descriptive issue. the search find and didn't it. the search. [x] already \"How FastAPI\" didn't any information. * [x] I the in docs an * [x] checked if not to but to already checked not FastAPI to * I checked but [ReDoc](https://github.com/Redocly/redoc). submitting this, issues until I 2 where comment to help * already hit the \"watch\" button in repository notifications to help at people ask questions the future. * for <!-- I'm all because in GitHub a of end up to fix bugs, Pull Requests, wish have to much time All top all incredible provided a bunch community members give of their come and help others. lot of are if FastAPI came them a bit be them (and you me --> ### Starlette the lifespan function in not code does The lifespan function is newer # handlers. or both. it's much to use (async)contextmanager the startup shutdown would to the option like an easier and officially function. import FastAPI SomeResource(): app ``` or from FastAPI = async def with yield alternatives you've considered I can simply by ```python from fastapi import FastAPI print(\"startup\") SomeResource(): = FastAPI() lifespan ``` this not would addition. could do nasty stuff with `__aenter__` fastapi app startup() print(\"startup\") app.state.resource.__aenter__() async def None, ``` but that ### Environment * OS: ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: context for application check [x] I added very descriptive issue. the searc...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 112.78118395805359,
+  "timestamp": "2026-06-19T21:00:52.797474"
+}

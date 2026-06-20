@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_high_tiangolo__fastapi-1547",
+  "task_id": "tiangolo__fastapi-1547",
+  "task_name": "SWE-bench: tiangolo__fastapi-1547",
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "need specify in ### Is related a want the it up with flow, but not because have add manually. The solution specify at a global level the ### Currently doing by adding something like { \"url\": \"http://example.com\" } ] ``` don't a PR this someone guide me about the need to be made. thing I saw the method value for ...",
+  "success": true,
+  "response": "I’m sorry, but the description of the task is unclear. Could you please provide a more detailed and concrete specification of what the program should do? Include information such as:\n\n- The purpose of the program (what problem it solves)\n- Expected inputs and outputs\n- Any specific requirements or constraints\n- Examples of usage, if possible\n\nWith a clearer specification I’ll be able to write the appropriate Python code for you.",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.1,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 432,
+  "elapsed_time": 90.45634770393372,
+  "timestamp": "2026-06-19T19:12:14.663158"
+}

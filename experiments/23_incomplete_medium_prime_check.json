@@ -1,0 +1,31 @@
+{
+  "experiment_id": "incomplete_medium_prime_check",
+  "task": {
+    "id": "prime_check",
+    "name": "Проверка простого числа",
+    "prompt": "Напиши функцию для проверки, является ли число простым на Python",
+    "keywords": [
+      "простое",
+      "prime",
+      "def",
+      "return",
+      "True",
+      "False"
+    ],
+    "difficulty": "easy",
+    "category": "math",
+    "expected_output": "function that returns boolean"
+  },
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "Напиши функцию для проверки, число простым Python ...",
+  "success": false,
+  "response": null,
+  "error": "Timeout 60s",
+  "baseline_quality": 1.0,
+  "buggy_quality": 0,
+  "quality_loss_percent": 100,
+  "is_robust": false,
+  "response_length": 0,
+  "timestamp": "2026-05-26T16:16:36.118098"
+}

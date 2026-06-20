@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_medium_tiangolo__fastapi-320",
+  "task_id": "tiangolo__fastapi-320",
+  "task_name": "SWE-bench: tiangolo__fastapi-320",
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "eta on pydantic update to really your latest it shoud solve recurring issues to mapping thank [неполные данные]",
+  "success": true,
+  "response": "```python\nfrom __future__ import annotations\n\nfrom typing import Any, Dict, Mapping, Type, TypeVar, Union\n\nfrom pydantic import BaseModel, ValidationError, root_validator\n\nT = TypeVar(\"T\", bound=BaseModel)\n\n\nclass ModelUpdateError(Exception):\n    \"\"\"Raised when an update cannot be applied to a Pydantic model.\"\"\"\n\n\ndef _merge_dicts(\n    original: Mapping[str, Any], updates: Mapping[str, Any]\n) -> Dict[str, Any]:\n    \"\"\"\n    Recursively merge two dictionaries.\n    Nested dictionaries are merged instead of overwritten.\n    \"\"\"\n    result: Dict[str, Any] = dict(original)\n    for key, value in updates.items():\n        if (\n            key in result\n            and isinstance(result[key], Mapping)\n            and isinstance(value, Mapping)\n        ):\n            result[key] = _merge_dicts(result[key], value)  # type: ignore[arg-type]\n        else:\n            result[key] = value\n    return result\n\n\ndef update_model(\n    model: T,\n    updates: Mapping[str, Any],\n    *,\n    allow_extra: bool = False,\n    validate: bool = True,\n) -> T:\n    \"\"\"\n    Return a new instance of ``model`` with ``updates`` applied.\n    Supports nested ``BaseModel`` fields and field aliases.\n\n    Args:\n        model: Existing Pydantic model instance.\n        updates: Mapping with fields to update.\n        allow_extra: If True, extra fields are ignored instead of raising.\n        validate: If True, the resulting model is validated (default).\n\n    Raises:\n        ModelUpdateError: If validation fails or an unknown field is supplied.\n    \"\"\"\n    # Convert model to dict respecting aliases and exclude unset defaults\n    model_dict = model.dict(by_alias=True, exclude_unset=False)\n\n    # Merge updates recursively\n    merged = _merge_dicts(model_dict, updates)\n\n    # Build a new model instance\n    try:\n        new_instance = model.__class__(**merged)  # type: ignore[call-arg]\n    except ValidationError as exc:\n        raise ModelUpdateError(f\"Validation failed: {exc}\") from exc\n    except TypeError as exc:\n        # Happens when unknown fields are passed and allow_extra=False\n        if not allow_extra:\n            raise ModelUpdateError(f\"Unknown fields in update: {exc}\") from exc\n        # Strip unknown fields and retry\n        known_fields = set(model.__fields__)\n        cleaned = {k: v for k, v in merged.items() if k in known_fields}\n        try:\n            new_instance = model.__class__(**cleaned)  # type: ignore[call-arg]\n        except ValidationError as exc2:\n            raise ModelUpdateError(f\"Validation after cleaning failed: {exc2}\") from exc2\n\n    if validate:\n        # Force validation (already done in constructor, but keep for API symmetry)\n        try:\n            new_instance = model.__class__.parse_obj(new_instance.dict())\n        except ValidationError as exc:\n            raise ModelUpdateError(f\"Post‑validation failed: {exc}\") from exc\n\n    return new_instance\n\n\n# --------------------------------------------------------------------------- #\n# Example usage\n# ---------",
+  "error": null,
+  "baseline_quality": 0.15000000000000002,
+  "buggy_quality": 0.39999999999999997,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 4351,
+  "elapsed_time": 117.76710176467896,
+  "timestamp": "2026-06-19T21:17:38.427735"
+}

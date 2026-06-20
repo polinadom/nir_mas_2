@@ -1,0 +1,31 @@
+{
+  "experiment_id": "baseline_tiangolo__fastapi-1547",
+  "task": {
+    "id": "tiangolo__fastapi-1547",
+    "name": "SWE-bench: tiangolo__fastapi-1547",
+    "prompt": "I need a way to specify servers in the openapi spec\n### Is your feature request related to a problem\r\n\r\nI want to be able to use the generated openapi.json doc as it is and hook it up with a document publishing flow, but i'm not able to because I have to add in information about `servers` manually.\r\n\r\n### The solution you would like\r\n\r\nSomeway to specify at a global level what the base server url should be.\r\n\r\n### Describe alternatives you've considered\r\n\r\nCurrently I'm doing this manually in the generated openapi.json by adding in something like - \r\n```\r\n    \"servers\": [\r\n        {\r\n            \"url\": \"http://example.com\"\r\n        }\r\n    ]\r\n```\r\n\r\nI don't mind submitting a PR which enables this if someone can guide me about the changes that need to be made. One thing I saw was that the `get_openapi` method in `fastapi.openapi.utils`, doesn't expose a parameter for setting a value for the `servers` key.\n",
+    "keywords": [
+      "fix",
+      "bug",
+      "implement",
+      "change",
+      "update"
+    ],
+    "difficulty": "hard",
+    "category": "swe_bench",
+    "swe_metadata": {
+      "repo": "tiangolo/fastapi",
+      "base_commit": "34c857b7cb493fa41f296c001234bc6b2ed6a083",
+      "patch": "diff --git a/fastapi/applications.py b/fastapi/applications.py\n--- a/fastapi/applications.py\n+++ b/fastapi/applications.py\n@@ -38,6 +38,7 @@ def __init__(\n         version: str = \"0.1.0\",\n         openapi_url: Optional[str] = \"/openapi.json\",\n         openapi_tags: Optional[List[Dict[str, Any]]] = None,\n+        servers: Optional[List[Dict[str, Union[str, Any]]]] = None,\n         default_response_class: Type[Response] = JSONResponse,\n         docs_url: Optional[str] = \"/docs\",\n         redoc_url: Optional[str] = \"/redoc\",\n@@ -70,6 +71,7 @@ def __init__(\n         self.title = title\n         self.description = description\n         self.version = version\n+        self.servers = servers\n         self.openapi_url = openapi_url\n         self.openapi_tags = openapi_tags\n         # TODO: remove when discarding the openapi_prefix parameter\n@@ -106,6 +108,7 @@ def openapi(self, openapi_prefix: str = \"\") -> Dict:\n                 routes=self.routes,\n                 openapi_prefix=openapi_prefix,\n                 tags=self.openapi_tags,\n+                servers=self.servers,\n             )\n         return self.openapi_schema\n \ndiff --git a/fastapi/openapi/models.py b/fastapi/openapi/models.py\n--- a/fastapi/openapi/models.py\n+++ b/fastapi/openapi/models.py\n@@ -63,7 +63,7 @@ class ServerVariable(BaseModel):\n \n \n class Server(BaseModel):\n-    url: AnyUrl\n+    url: Union[AnyUrl, str]\n     description: Optional[str] = None\n     variables: Optional[Dict[str, ServerVariable]] = None\n \ndiff --git a/fastapi/openapi/utils.py b/fastapi/openapi/utils.py\n--- a/fastapi/openapi/utils.py\n+++ b/fastapi/openapi/utils.py\n@@ -86,7 +86,7 @@ def get_openapi_security_definitions(flat_dependant: Dependant) -> Tuple[Dict, L\n def get_openapi_operation_parameters(\n     *,\n     all_route_params: Sequence[ModelField],\n-    model_name_map: Dict[Union[Type[BaseModel], Type[Enum]], str]\n+    model_name_map: Dict[Union[Type[BaseModel], Type[Enum]], str],\n ) -> List[Dict[str, Any]]:\n     parameters = []\n     for param in all_route_params:\n@@ -112,7 +112,7 @@ def get_openapi_operation_parameters(\n def get_openapi_operation_request_body(\n     *,\n     body_field: Optional[ModelField],\n-    model_name_map: Dict[Union[Type[BaseModel], Type[Enum]], str]\n+    model_name_map: Dict[Union[Type[BaseModel], Type[Enum]], str],\n ) -> Optional[Dict]:\n     if not body_field:\n         return None\n@@ -318,12 +318,15 @@ def get_openapi(\n     description: str = None,\n     routes: Sequence[BaseRoute],\n     openapi_prefix: str = \"\",\n-    tags: Optional[List[Dict[str, Any]]] = None\n+    tags: Optional[List[Dict[str, Any]]] = None,\n+    servers: Optional[List[Dict[str, Union[str, Any]]]] = None,\n ) -> Dict:\n     info = {\"title\": title, \"version\": version}\n     if description:\n         info[\"description\"] = description\n     output: Dict[str, Any] = {\"openapi\": openapi_version, \"info\": info}\n+    if servers:\n+        output[\"servers\"] = servers\n     components: Dict[str, Dict] = {}\n     paths: Dict[str, Dict] = {}\n     flat_models = get_flat_models_from_routes(routes)\n"
+    }
+  },
+  "bug_type": "none",
+  "intensity": "none",
+  "clean_prompt": "I need a way to specify servers in the openapi spec\n### Is your feature request related to a problem\r\n\r\nI want to be able to use the generated openapi.json doc as it is and hook it up with a document publishing flow, but i'm not able to because I have to add in information about `servers` manually.\r\n\r\n### The solution you would like\r\n\r\nSomeway to specify at a global level what the base server url should be.\r\n\r\n### Describe alternatives you've considered\r\n\r\nCurrently I'm doing this manually in the generated openapi.json by adding in something like - \r\n```\r\n    \"servers\": [\r\n        {\r\n            \"url\": \"http://example.com\"\r\n        }\r\n    ]\r\n```\r\n\r\nI don't mind submitting a PR which enables this if someone can guide me about the changes that need to be made. One thing I saw was that the `get_openapi` method in `fastapi.openapi.utils`, doesn't expose a parameter for setting a value for the `servers` key.\n",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: I need a way to specify servers in the openapi spec\n### Is your feature req...",
+  "error": null,
+  "quality_score": 0.05,
+  "response_length": 137,
+  "timestamp": "2026-06-19T19:06:27.558656"
+}

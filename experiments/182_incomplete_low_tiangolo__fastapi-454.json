@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_low_tiangolo__fastapi-454",
+  "task_id": "tiangolo__fastapi-454",
+  "task_name": "SWE-bench: tiangolo__fastapi-454",
+  "bug_type": "incomplete",
+  "intensity": "low",
+  "buggy_prompt": "Add support for Pydantic's dataclasses **Describe the question** am using a pydantic.dataclasses.dataclass as a response_model of my fast api route. ``` from fastapi import FastAPI pydantic.dataclasses import dataclass @dataclass class Foo: bar: int app = @app.get('/foo', def get_bar() -> Foo: return Foo(bar=1) ``` **To Reproduce** Steps to reproduce the 1. Create a file with the above code. 2. Start the app: `uvicorn app:app` 3. Open the browser go to **localhost:8000/foo** 4. See error: ``` pydantic.error_wrappers.ValidationError: 1 validation error response got an unexpected keyword argument (type=type_error) ``` **Expected behavior** validation error and serialized json does not keys `__initialised__`. **Environment:** - OS: Linux - FastAPI Version 0.25.0 - Python 3.7.3 ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Add support for Pydantic's dataclasses **Describe the question** am using a...",
+  "error": null,
+  "baseline_quality": 0.30000000000000004,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 83.3,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 122.33537244796753,
+  "timestamp": "2026-06-19T23:24:29.030537"
+}

@@ -1,0 +1,30 @@
+{
+  "experiment_id": "noise_medium_factorial",
+  "task": {
+    "id": "factorial",
+    "name": "Факториал числа",
+    "prompt": "Напиши функцию для вычисления факториала числа на Python",
+    "keywords": [
+      "факториал",
+      "factorial",
+      "def",
+      "return",
+      "function"
+    ],
+    "difficulty": "easy",
+    "category": "math",
+    "expected_output": "function that returns factorial"
+  },
+  "bug_type": "noise",
+  "intensity": "medium",
+  "buggy_prompt": "Напиши функцию для вычисления факториала числа на Python ixanzd",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\n```python\\ndef factorial(n):\\n    \\\"\\\"\\\"\\n    Вычисляет факториал числа n.\\n\\n    Параметры:\\n    n (int): Неотрицательное целое число.\\n\\n    Возвращает:\\n    int: Факториал числа n.\\n\\n    Исключения:\\n    ValueError: Если n отрицательное.\\n    \\\"\\\"\\\"\\n    if n < 0:\\n        raise ValueError(\\\"Факториал не определен для отрицательных чисел.\\\")\\n    result = 1\\n    for i in range(2, n + 1):\\n        result *= i\\n    return result\\n```\",\n  \"timestamp\": \"2026-05-26T16:10:47.669912\",\n  \"workspace\": \"C:\\\\my_repo\\\\nir_mas\\\\nir_mas\\\\demo_workspace\"\n}\n",
+  "error": null,
+  "baseline_quality": 0.8571428571428571,
+  "buggy_quality": 0.8571428571428571,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 594,
+  "timestamp": "2026-05-26T16:10:47.845899"
+}

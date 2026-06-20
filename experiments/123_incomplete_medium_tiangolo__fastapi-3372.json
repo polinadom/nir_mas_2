@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_medium_tiangolo__fastapi-3372",
+  "task_id": "tiangolo__fastapi-3372",
+  "task_name": "SWE-bench: tiangolo__fastapi-3372",
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "Trio library for concurrency and I/O **Description** Hello! using Hypercorn with uvloop. like to use Hypercorn with trio, the program doesn't when uvloop trio. have plans to implement trio? Thank's! Nice ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Trio library for concurrency and I/O **Description** Hello! using Hypercorn...",
+  "error": null,
+  "baseline_quality": 0.30000000000000004,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 83.3,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 118.83341479301453,
+  "timestamp": "2026-06-19T21:34:54.052322"
+}

@@ -1,0 +1,18 @@
+{
+  "experiment_id": "noise_medium_tiangolo__fastapi-320",
+  "task_id": "tiangolo__fastapi-320",
+  "task_name": "SWE-bench: tiangolo__fastapi-320",
+  "bug_type": "noise",
+  "intensity": "medium",
+  "buggy_prompt": "мусор eta on pydantic update to 0.28\nreally need your latest PR \r\nit shoud solve recurring issues with sqlalchemy to pydantic mapping\r\nthank you !\n",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: мусор eta on pydantic update to 0.28\nreally need your latest PR \r\nit shoud ...",
+  "error": null,
+  "baseline_quality": 0.15000000000000002,
+  "buggy_quality": 0.15000000000000002,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 125.16409611701965,
+  "timestamp": "2026-06-19T21:23:24.594228"
+}

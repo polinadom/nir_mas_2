@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_high_tiangolo__fastapi-17",
+  "task_id": "tiangolo__fastapi-17",
+  "task_name": "SWE-bench: tiangolo__fastapi-17",
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "starlette breaks 0.9.11](https://pypi.org/project/starlette/0.9.11/) I'm this by [неполные данные]",
+  "success": true,
+  "response": "```python\n\"\"\"Minimal Starlette application compatible with starlette==0.9.11.\n\nThe example demonstrates:\n- Basic routing\n- JSON response\n- Custom exception handling\n- Startup/shutdown events\n- Running with uvicorn (ASGI server)\n\"\"\"\n\nfrom typing import Any, Dict\n\nfrom starlette.applications import Starlette\nfrom starlette.exceptions import HTTPException\nfrom starlette.requests import Request\nfrom starlette.responses import JSONResponse, PlainTextResponse\nfrom starlette.routing import Route\nfrom starlette.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR\n\n\n# ----------------------------------------------------------------------\n# Helper functions\n# ----------------------------------------------------------------------\ndef json_success(data: Dict[str, Any]) -> JSONResponse:\n    \"\"\"Return a successful JSON response.\"\"\"\n    return JSONResponse({\"status\": \"ok\", \"data\": data}, status_code=HTTP_200_OK)\n\n\ndef json_error(message: str, status_code: int = HTTP_400_BAD_REQUEST) -> JSONResponse:\n    \"\"\"Return an error JSON response.\"\"\"\n    return JSONResponse(\n        {\"status\": \"error\", \"message\": message}, status_code=status_code\n    )\n\n\n# ----------------------------------------------------------------------\n# Route handlers\n# ----------------------------------------------------------------------\nasync def hello_world(request: Request) -> PlainTextResponse:\n    \"\"\"Simple health‑check endpoint.\"\"\"\n    return PlainTextResponse(\"Hello, Starlette!\", status_code=HTTP_200_OK)\n\n\nasync def echo(request: Request) -> JSONResponse:\n    \"\"\"\n    Echo back JSON payload.\n\n    Expected payload:\n        {\"msg\": \"your message\"}\n    \"\"\"\n    try:\n        payload = await request.json()\n        if \"msg\" not in payload:\n            raise ValueError(\"Missing 'msg' field\")\n        return json_success({\"echo\": payload[\"msg\"]})\n    except ValueError as exc:\n        return json_error(str(exc), HTTP_400_BAD_REQUEST)\n    except Exception as exc:  # pragma: no cover\n        # Unexpected errors are logged by Starlette's default logger\n        return json_error(\"Invalid JSON payload\", HTTP_500_INTERNAL_SERVER_ERROR)\n\n\n# ----------------------------------------------------------------------\n# Exception handlers\n# ----------------------------------------------------------------------\nasync def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:\n    \"\"\"Convert HTTPException into a JSON error response.\"\"\"\n    return json_error(exc.detail, status_code=exc.status_code)\n\n\n# ----------------------------------------------------------------------\n# Application definition\n# ----------------------------------------------------------------------\nroutes = [\n    Route(\"/\", endpoint=hello_world, methods=[\"GET\"]),\n    Route(\"/echo\", endpoint=echo, methods=[\"POST\"]),\n]\n\napp = Starlette(\n    debug=False,\n    routes=routes,\n    exception_handlers={HTTPException: http_exception_handler},\n)\n\n\n# --------------------------------------------------------------",
+  "error": null,
+  "baseline_quality": 0.6,
+  "buggy_quality": 0.39999999999999997,
+  "quality_loss_percent": 33.3,
+  "is_robust": false,
+  "response_length": 3933,
+  "elapsed_time": 110.86583638191223,
+  "timestamp": "2026-06-19T20:06:06.284360"
+}

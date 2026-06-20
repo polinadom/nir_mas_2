@@ -1,0 +1,9 @@
+{
+  "id": "prime_check",
+  "name": "Проверка простого числа",
+  "prompt": "Напиши функцию для проверки, является ли число простым на Python",
+  "keywords": ["простое", "prime", "def", "return", "True", "False"],
+  "difficulty": "easy",
+  "category": "math",
+  "expected_output": "function that returns boolean"
+}

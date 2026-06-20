@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_high_tiangolo__fastapi-681",
+  "task_id": "tiangolo__fastapi-681",
+  "task_name": "SWE-bench: tiangolo__fastapi-681",
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "dependency a **Describe you an async method as `ValueError` thrown. [KeyError(<class object not argument **To ```py from import DependencyClass: async async_dep(self, def True = dependency = DependencyClass() # @app.get('/async-dep') async_dep(r=Depends(dependency.async_dep)): r # Everything fine @app.get('/sync-dep') def sync_dep(r=Depends(dependency.sync_dep)): return class method should called and return - OS: macOS FastAPI version: context** issue comes https://github.com/tiangolo/fastapi/blob/65536cbf63318d111bf608960378d651b6c1596a/fastapi/dependencies/utils.py#L353-L359 `False` in case of a class it the coroutine, and we end up to (hence the `ValueError`). Changing by: inspect.isfunction(call) ``` solves can make with the and [неполные данные]",
+  "success": true,
+  "response": "```python\nimport asyncio\nfrom typing import Any, Dict\n\n\nclass DependencyError(RuntimeError):\n    \"\"\"Custom exception for dependency‑related errors.\"\"\"\n\n\nasync def fetch_data(source: Dict[str, Any], key: str) -> Any:\n    \"\"\"\n    Simulate an asynchronous data fetch.\n\n    Raises:\n        ValueError: If the retrieved value does not meet validation criteria.\n        KeyError:   If the requested key is missing from the source.\n    \"\"\"\n    # Simulate I/O latency\n    await asyncio.sleep(0.1)\n\n    # May raise KeyError if key is absent\n    value = source[key]\n\n    # Simple validation that triggers ValueError\n    if not isinstance(value, (int, float)):\n        raise ValueError(f\"Invalid data type for key '{key}': {type(value).__name__}\")\n\n    return value\n\n\nasync def process_data(source: Dict[str, Any], key: str) -> float:\n    \"\"\"\n    Retrieve a numeric value and perform a calculation.\n\n    Handles:\n        KeyError – wrapped into DependencyError with a clear message.\n        ValueError – propagated to the caller.\n    \"\"\"\n    try:\n        raw_value = await fetch_data(source, key)\n    except KeyError as exc:\n        # Convert low‑level KeyError into a domain‑specific exception\n        raise DependencyError(f\"Missing required key: {key}\") from exc\n\n    # Example calculation: square the value\n    return float(raw_value) ** 2\n\n\n# -------------------- Example usage --------------------\nif __name__ == \"__main__\":\n    async def main() -> None:\n        data = {\"a\": 3, \"b\": \"not a number\"}\n\n        # Successful case\n        try:\n            result = await process_data(data, \"a\")\n            print(f\"Result for 'a': {result}\")\n        except Exception as e:\n            print(f\"Error processing 'a': {e}\")\n\n        # KeyError wrapped as DependencyError\n        try:\n            await process_data(data, \"c\")\n        except DependencyError as e:\n            print(f\"Dependency error: {e}\")\n\n        # ValueError from invalid type\n        try:\n            await process_data(data, \"b\")\n        except ValueError as e:\n            print(f\"Validation error: {e}\")\n\n    asyncio.run(main())\n```",
+  "error": null,
+  "baseline_quality": 0.39999999999999997,
+  "buggy_quality": 0.30000000000000004,
+  "quality_loss_percent": 25.0,
+  "is_robust": false,
+  "response_length": 2094,
+  "elapsed_time": 104.84733819961548,
+  "timestamp": "2026-06-20T01:17:34.898453"
+}

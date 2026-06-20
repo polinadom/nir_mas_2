@@ -1,0 +1,18 @@
+{
+  "experiment_id": "contradiction_high_tiangolo__fastapi-621",
+  "task_id": "tiangolo__fastapi-621",
+  "task_name": "SWE-bench: tiangolo__fastapi-621",
+  "bug_type": "contradiction",
+  "intensity": "high",
+  "buggy_prompt": "204 No Content support for OpenAPI schema\nI would like to be able to specify in the endpoint decorator that the endpoint will have no response (204 No Content). This is documented in the [swagger.io specification](https://swagger.io/docs/specification/describing-responses/) under the heading Empty Response Body.\r\n\r\n**Is your feature request related to a problem? Please describe.**\r\nThis would allow my `openapi-generator`-generated client to detect that there will not be a response, and will automatically make use of an appropriate response (non-)decoder. \r\n\r\nIt's not a terribly hard issue to work around manually by tweaking my generated client, but it would simplify things if I could generate an OpenAPI schema without the content field for the 204-response endpoints.\r\n\r\n**Describe the solution you'd like**\r\nSo far, my favorite version of an end-user-facing API would involve introducing a new response class (perhaps called `NoContentResponse`) to pass in the endpoint decorator. \r\n\r\n(But I'm not sure how that would interact with `starlette` or if detecting the response_class is even feasible when generating the OpenAPI spec.)\n но не используй циклы (это обязательно)",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: 204 No Content support for OpenAPI schema\nI would like to be able to specif...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 86.20649766921997,
+  "timestamp": "2026-06-20T00:53:33.693708"
+}

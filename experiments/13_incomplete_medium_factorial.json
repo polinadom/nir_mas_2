@@ -1,0 +1,30 @@
+{
+  "experiment_id": "incomplete_medium_factorial",
+  "task": {
+    "id": "factorial",
+    "name": "Факториал числа",
+    "prompt": "Напиши функцию для вычисления факториала числа на Python",
+    "keywords": [
+      "факториал",
+      "factorial",
+      "def",
+      "return",
+      "function"
+    ],
+    "difficulty": "easy",
+    "category": "math",
+    "expected_output": "function that returns factorial"
+  },
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "функцию для вычисления факториала на [пропущено]",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот функция для вычисления факториала на языке **Python**, реализованная как итеративно, так и рекурсивно, с обработкой ошибок:\\n\\n---\\n\\n### **Итеративная реализация**\\n```python\\ndef factorial_iterative(n):\\n    if n < 0:\\n        return None  # Факториал определён только для неотрицательных чисел\\n    result = 1\\n    for i in range(2, n + 1):\\n        result *= i\\n    return result\\n```\\n\\n---\\n\\n### **Рекурсивная реализация**\\n```python\\ndef factorial_recursive(n):\\n    if n < 0:\\n        return None  # Факториал определён только для неотрицательных чисел\\n    if n == 0 or n == 1:\\n        return 1\\n    return n * factorial_recursive(n - 1)\\n```\\n\\n---\\n\\n### **Примеры использования**\\n```python\\nprint(factorial_iterative(5))   # Вывод: 120\\nprint(factorial_recursive(5))   # Вывод: 120\\n\\nprint(factorial_iterative(-3))  # Вывод: None (ошибка)\\n```\\n\\n---\\n\\n### **Примечания**\\n1. **Итеративный подход**:\\n   - Подходит для больших чисел (неограниченный стек).\\n   - Использует минимальную память.\\n\\n2. **Рекурсивный подход**:\\n   - Простой в понимании, но может вызвать переполнение стека для `n > 1000` (в Python по умолчанию).\\n\\n3. **Ограничения**:\\n   - Для очень больших `n` (например, `n = 1000000`) рекомендуется использовать библиотеки с поддержкой произвольной точности, например, `math.factorial` (встроенная функция Python).\\n\\n---\\n\\nЕсли вы хотите реализацию на другом языке (например, C++, Java, JavaScript), уточните, и я предоставлю пример!\",\n  \"timestamp\": \"2026-05-26T16:09:10.375071\",\n  \"workspace\": \"C:\\\\my_repo\\\\nir_mas\\\\nir_mas\\\\demo_workspace\"\n}\n",
+  "error": null,
+  "baseline_quality": 0.8571428571428571,
+  "buggy_quality": 0.8571428571428571,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 1629,
+  "timestamp": "2026-05-26T16:09:10.541231"
+}

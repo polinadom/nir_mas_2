@@ -1,0 +1,31 @@
+{
+  "experiment_id": "noise_low_bank_account",
+  "task": {
+    "id": "bank_account",
+    "name": "Банковский счёт",
+    "prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance",
+    "keywords": [
+      "class",
+      "BankAccount",
+      "deposit",
+      "withdraw",
+      "get_balance",
+      "def"
+    ],
+    "difficulty": "medium",
+    "category": "oop",
+    "expected_output": "class with methods"
+  },
+  "bug_type": "noise",
+  "intensity": "low",
+  "buggy_prompt": "ошибка Создай класс BankAccount на Python с методами deposit, withdraw и get_balance",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот реализация класса `BankAccount` на Python с методами `deposit`, `withdraw` и `get_balance`. Класс включает проверки на корректность вводимых данных, что делает его надежным и предотвращает ошибки, такие как отрицательные суммы или попытки снять больше, чем доступно.\\n\\n```python\\nclass BankAccount:\\n    def __init__(self, balance=0):\\n        \\\"\\\"\\\"\\n        Инициализирует объект BankAccount с заданным начальным балансом.\\n        Если баланс не указан, он устанавливается равным нулю.\\n        \\\"\\\"\\\"\\n        if balance < 0:\\n            raise ValueError(\\\"Начальный баланс не может быть отрицательным\\\")\\n        self.balance = balance\\n\\n    def deposit(self, amount):\\n        \\\"\\\"\\\"\\n        Добавляет указанную сумму на счет.\\n        Выбрасывает исключение, если сумма депозита <= 0.\\n        \\\"\\\"\\\"\\n        if amount <= 0:\\n            raise ValueError(\\\"Сумма депозита должна быть положительной\\\")\\n        self.balance += amount\\n\\n    def withdraw(self, amount):\\n        \\\"\\\"\\\"\\n        Снимает указанную сумму со счета, если на счете достаточно средств.\\n        Возвращает True, если снятие успешно, и False, если средств недостаточно.\\n        Выбрасывает исключение, если сумма снятия <= 0.\\n        \\\"\\\"\\\"\\n        if amount <= 0:\\n            raise ValueError(\\\"Сумма снятия должна быть положительной\\\")\\n        if amount > self.balance:\\n            return False\\n        self.balance -= amount\\n        return True\\n\\n    def get_balance(self):\\n        \\\"\\\"\\\"\\n        Возвращает текущий баланс на счете.\\n        \\\"\\\"\\\"\\n        return self.balance\\n```\\n\\n### Пример использования\\n\\n```python\\n# Создание объекта BankAccount с начальным балансом 100\\naccount = BankAccount(100)\\n\\n# Внесение средств на счет\\naccount.deposit(50)\\nprint(\\\"Баланс после депозита:\\\", account.get_balance())  # Вывод: 150\\n\\n# Снятие средств\\nsuccess = account.withdraw(75)\\nprint(\\\"Снятие 75:\\\", \\\"Успешно\\\" if success else \\\"Неуспешно\\\")\\npri",
+  "error": null,
+  "baseline_quality": 0,
+  "buggy_quality": 1.0,
+  "quality_loss_percent": 0,
+  "is_robust": true,
+  "response_length": 3120,
+  "timestamp": "2026-05-26T16:03:32.817251"
+}

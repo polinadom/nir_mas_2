@@ -1,0 +1,9 @@
+{
+  "id": "factorial",
+  "name": "Факториал числа",
+  "prompt": "Напиши функцию для вычисления факториала числа на Python",
+  "keywords": ["факториал", "factorial", "def", "return", "function"],
+  "difficulty": "easy",
+  "category": "math",
+  "expected_output": "function that returns factorial"
+}

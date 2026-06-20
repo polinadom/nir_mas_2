@@ -1,0 +1,18 @@
+{
+  "experiment_id": "contradiction_low_tiangolo__fastapi-1549",
+  "task_id": "tiangolo__fastapi-1549",
+  "task_name": "SWE-bench: tiangolo__fastapi-1549",
+  "bug_type": "contradiction",
+  "intensity": "low",
+  "buggy_prompt": "dependency_overrides does not play well with scopes\n**Describe the bug**\r\nWhen working with `Security()` dependencies, the scopes disappear when `app.dependency_overrides` is executed. The callable dealing with the scopes gets an empty list instead of the scopes.\r\n\r\n**To Reproduce**\r\n\r\n```python\r\nfrom fastapi import FastAPI, Header, Security, Depends\r\nfrom fastapi.security import SecurityScopes\r\n\r\nfrom starlette.testclient import TestClient\r\n\r\napp = FastAPI()\r\n\r\ndef get_user(required_scopes: SecurityScopes):\r\n    print(required_scopes.scopes)\r\n\r\n    return \"John Doe\"\r\n\r\ndef data():\r\n    return [1,2,3]\r\n\r\ndef other_data():\r\n    return [3,4,5]\r\n\r\n\r\n@app.get(\"/test\")\r\ndef test(user: str = Security(get_user, scopes=[\"foo\", \"bar\"]), data = Depends(data)):\r\n    return data\r\n\r\nclient = TestClient(app)\r\nresponse = client.get(\"/test\")\r\n\r\napp.dependency_overrides[data] = other_data\r\nresponse = client.get(\"/test\")\r\n\r\n# prints: [\"foo\", \"bar\"] and [] instead of [\"foo\", \"bar\"] and [\"foo\", \"bar\"]\r\n```\r\n\r\n**Expected behavior**\r\nIn the above example I expect `get_user()` to print the same scopes twice. Instead, before the `dependency_overrides` it prints the correct scpoes, but an empty list afterwards.\r\n\r\n**Environment:**\r\n - OS: Linux\r\n - FastAPI Version 0.43.0\r\n- Python 3.7.4\r\n\n однако сделай это без рекурсии (если возможно)",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: dependency_overrides does not play well with scopes\n**Describe the bug**\r\nW...",
+  "error": null,
+  "baseline_quality": 0.15000000000000002,
+  "buggy_quality": 0.15000000000000002,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 86.30867910385132,
+  "timestamp": "2026-06-19T19:38:22.383523"
+}

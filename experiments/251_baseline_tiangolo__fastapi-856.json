@@ -1,0 +1,31 @@
+{
+  "experiment_id": "baseline_tiangolo__fastapi-856",
+  "task": {
+    "id": "tiangolo__fastapi-856",
+    "name": "SWE-bench: tiangolo__fastapi-856",
+    "prompt": "Support repeated key=value in form data\n### Is your feature request related to a problem\r\n\r\nYes.\r\n\r\nGiven some URL encoded data like this...\r\n\r\n```\r\nchoices=parrot&choices=spider\r\n```\r\n\r\n...only the last key=value wins.\r\n\r\nThis does not work like I expected:\r\n```python\r\nchoices: list = Form(...)\r\n```\r\n\r\nYou can only validate against the last value.\r\n\r\n### The solution you would like\r\n\r\nPerhaps FastAPI should collect repeated keys in the 2-tuple list that `request.form()` gives and assign those values as a list to the same key before validation happens.\r\n\r\n\r\n\n",
+    "keywords": [
+      "fix",
+      "bug",
+      "implement",
+      "change",
+      "update"
+    ],
+    "difficulty": "hard",
+    "category": "swe_bench",
+    "swe_metadata": {
+      "repo": "tiangolo/fastapi",
+      "base_commit": "3eca945bd17600a0be6eae1d8fd93ba8f9805006",
+      "patch": "diff --git a/fastapi/dependencies/utils.py b/fastapi/dependencies/utils.py\n--- a/fastapi/dependencies/utils.py\n+++ b/fastapi/dependencies/utils.py\n@@ -629,9 +629,9 @@ async def request_body_to_args(\n         for field in required_params:\n             value: Any = None\n             if received_body is not None:\n-                if field.shape in sequence_shapes and isinstance(\n-                    received_body, FormData\n-                ):\n+                if (\n+                    field.shape in sequence_shapes or field.type_ in sequence_types\n+                ) and isinstance(received_body, FormData):\n                     value = received_body.getlist(field.alias)\n                 else:\n                     value = received_body.get(field.alias)\n"
+    }
+  },
+  "bug_type": "none",
+  "intensity": "none",
+  "clean_prompt": "Support repeated key=value in form data\n### Is your feature request related to a problem\r\n\r\nYes.\r\n\r\nGiven some URL encoded data like this...\r\n\r\n```\r\nchoices=parrot&choices=spider\r\n```\r\n\r\n...only the last key=value wins.\r\n\r\nThis does not work like I expected:\r\n```python\r\nchoices: list = Form(...)\r\n```\r\n\r\nYou can only validate against the last value.\r\n\r\n### The solution you would like\r\n\r\nPerhaps FastAPI should collect repeated keys in the 2-tuple list that `request.form()` gives and assign those values as a list to the same key before validation happens.\r\n\r\n\r\n\n",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Support repeated key=value in form data\n### Is your feature request related...",
+  "error": null,
+  "quality_score": 0.05,
+  "response_length": 137,
+  "timestamp": "2026-06-20T01:27:40.240124"
+}

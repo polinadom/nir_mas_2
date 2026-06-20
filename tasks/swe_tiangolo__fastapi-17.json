@@ -1,0 +1,19 @@
+{
+  "id": "tiangolo__fastapi-17",
+  "name": "SWE-bench: tiangolo__fastapi-17",
+  "prompt": "starlette update breaks routing\n[starlette 0.9.11](https://pypi.org/project/starlette/0.9.11/) breaks fastapi routing\r\nI'm currently working around this by enforcing starlette==0.9.10\n",
+  "keywords": [
+    "fix",
+    "bug",
+    "implement",
+    "change",
+    "update"
+  ],
+  "difficulty": "hard",
+  "category": "swe_bench",
+  "swe_metadata": {
+    "repo": "tiangolo/fastapi",
+    "base_commit": "014c7df142baf0e5cade2c452edfc0c138fda398",
+    "patch": "diff --git a/fastapi/routing.py b/fastapi/routing.py\n--- a/fastapi/routing.py\n+++ b/fastapi/routing.py\n@@ -18,7 +18,7 @@\n from starlette.formparsers import UploadFile\n from starlette.requests import Request\n from starlette.responses import JSONResponse, Response\n-from starlette.routing import get_name, request_response\n+from starlette.routing import compile_path, get_name, request_response\n from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY\n \n \n@@ -149,9 +149,7 @@ def __init__(\n         self.include_in_schema = include_in_schema\n         self.content_type = content_type\n \n-        self.path_regex, self.path_format, self.param_convertors = self.compile_path(\n-            path\n-        )\n+        self.path_regex, self.path_format, self.param_convertors = compile_path(path)\n         assert inspect.isfunction(endpoint) or inspect.ismethod(\n             endpoint\n         ), f\"An endpoint must be a function or method\"\n"
+  }
+}

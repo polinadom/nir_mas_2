@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_low_tiangolo__fastapi-320",
+  "task_id": "tiangolo__fastapi-320",
+  "task_name": "SWE-bench: tiangolo__fastapi-320",
+  "bug_type": "incomplete",
+  "intensity": "low",
+  "buggy_prompt": "eta on pydantic update to 0.28 really need your latest PR it solve recurring issues with sqlalchemy pydantic mapping thank ! ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: eta on pydantic update to 0.28 really need your latest PR it solve recurrin...",
+  "error": null,
+  "baseline_quality": 0.15000000000000002,
+  "buggy_quality": 0.15000000000000002,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 118.40710639953613,
+  "timestamp": "2026-06-19T21:15:39.653186"
+}

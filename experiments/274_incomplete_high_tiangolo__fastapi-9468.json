@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_high_tiangolo__fastapi-9468",
+  "task_id": "tiangolo__fastapi-9468",
+  "task_name": "SWE-bench: tiangolo__fastapi-9468",
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "FastAPI pydantic failing ### Privileged issue - @tiangolo or asked directly issue here. Content are failing to new issue fastapi see from pydantic's ______ ERROR collecting ______ in <module> import in <module> from flask importlib._bootstrap>:1075: in in E 'flask.escape' is deprecated in 2.4. Import 'markupsafe.escape' short info DeprecationWarning: is and Flask 2.4. ``` ...",
+  "success": true,
+  "response": "```python\n# app.py\nfrom fastapi import FastAPI, HTTPException, Request\nfrom fastapi.responses import JSONResponse\nfrom pydantic import BaseModel, Field, ValidationError\nfrom typing import List\n\napp = FastAPI()\n\n\nclass Item(BaseModel):\n    \"\"\"Model for incoming item data.\"\"\"\n    name: str = Field(..., min_length=1, max_length=50)\n    price: float = Field(..., gt=0)\n    tags: List[str] = Field(default_factory=list, max_items=5)\n\n\n@app.exception_handler(ValidationError)\nasync def pydantic_validation_exception_handler(\n    request: Request, exc: ValidationError\n) -> JSONResponse:\n    \"\"\"Return a clean JSON response for Pydantic validation errors.\"\"\"\n    errors = [\n        {\"field\": err[\"loc\"][-1], \"message\": err[\"msg\"]} for err in exc.errors()\n    ]\n    return JSONResponse(\n        status_code=422,\n        content={\"detail\": errors, \"error\": \"Invalid request data\"},\n    )\n\n\n@app.exception_handler(HTTPException)\nasync def http_exception_handler(\n    request: Request, exc: HTTPException\n) -> JSONResponse:\n    \"\"\"Standardize HTTPException responses.\"\"\"\n    return JSONResponse(\n        status_code=exc.status_code,\n        content={\"detail\": exc.detail, \"error\": \"HTTP error\"},\n    )\n\n\n@app.post(\"/items/\", response_model=Item, status_code=201)\nasync def create_item(item: Item):\n    \"\"\"\n    Create a new item.\n    FastAPI automatically validates the request body against the Item model.\n    \"\"\"\n    # Here you would normally persist the item (e.g., DB insert)\n    return item\n\n\n# Example usage (run with: uvicorn app:app --reload)\n# -------------------------------------------------\n# 1. Successful request:\n# curl -X POST \"http://127.0.0.1:8000/items/\" -H \"Content-Type: application/json\" \\\n#      -d '{\"name\":\"Apple\",\"price\":1.23,\"tags\":[\"fruit\",\"food\"]}'\n#\n# 2. Validation error (price <= 0):\n# curl -X POST \"http://127.0.0.1:8000/items/\" -H \"Content-Type: application/json\" \\\n#      -d '{\"name\":\"Apple\",\"price\":0,\"tags\":[\"fruit\",\"food\"]}'\n#\n# 3. Validation error (missing name):\n# curl -X POST \"http://127.0.0.1:8000/items/\" -H \"Content-Type: application/json\" \\\n#      -d '{\"price\":1.23}'\n```",
+  "error": null,
+  "baseline_quality": 0.39999999999999997,
+  "buggy_quality": 0.30000000000000004,
+  "quality_loss_percent": 25.0,
+  "is_robust": false,
+  "response_length": 2107,
+  "elapsed_time": 105.00213527679443,
+  "timestamp": "2026-06-20T02:07:42.290605"
+}

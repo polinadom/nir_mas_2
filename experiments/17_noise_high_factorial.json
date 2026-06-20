@@ -1,0 +1,30 @@
+{
+  "experiment_id": "noise_high_factorial",
+  "task": {
+    "id": "factorial",
+    "name": "Факториал числа",
+    "prompt": "Напиши функцию для вычисления факториала числа на Python",
+    "keywords": [
+      "факториал",
+      "factorial",
+      "def",
+      "return",
+      "function"
+    ],
+    "difficulty": "easy",
+    "category": "math",
+    "expected_output": "function that returns factorial"
+  },
+  "bug_type": "noise",
+  "intensity": "high",
+  "buggy_prompt": "Напиши функцию для вычисления факториала числа на Python qwertyqwerty",
+  "success": false,
+  "response": null,
+  "error": "Timeout 60s",
+  "baseline_quality": 0.8571428571428571,
+  "buggy_quality": 0,
+  "quality_loss_percent": 100,
+  "is_robust": false,
+  "response_length": 0,
+  "timestamp": "2026-05-26T16:11:47.901652"
+}

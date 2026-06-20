@@ -1,0 +1,31 @@
+{
+  "experiment_id": "contradiction_high_sorting",
+  "task": {
+    "id": "sorting",
+    "name": "Сортировка списка",
+    "prompt": "Напиши функцию для сортировки списка чисел на Python",
+    "keywords": [
+      "сортировка",
+      "sort",
+      "def",
+      "return",
+      "список",
+      "list"
+    ],
+    "difficulty": "medium",
+    "category": "algorithm",
+    "expected_output": "function that returns sorted list"
+  },
+  "bug_type": "contradiction",
+  "intensity": "high",
+  "buggy_prompt": "Напиши функцию для сортировки списка чисел на Python однако программа не должна ничего возвращать (это обязательно)",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот функция, которая сортирует список чисел на месте и не возвращает никакого значения:\\n\\n```python\\ndef sort_numbers(numbers):\\n    numbers.sort()\\n```\\n\\n### Объяснение:\\n\\n- **`numbers.sort()`**  это встроенный метод для сортировки списка на месте. Он изменяет переданный список напрямую, не создавая новый.\\n- **Функция не использует `return`**, что соответствует требованию задачи  она ничего не возвращает.\\n- **Изменения происходят в оригинальном списке**, переданном как аргумент.\\n\\n### Пример использования:\\n\\n```python\\nnums = [3, 1, 4, 2]\\nsort_numbers(nums)\\nprint(nums)  # Вывод: [1, 2, 3, 4]\\n```\\n\\nПосле вызова `sort_numbers(nums)`, список `nums` будет изменён напрямую. Если попытаться вывести результат вызова `sort_numbers(nums)`, будет выведено `None`, что подтверждает, что функция ничего не возвращает.\\n\\n### Дополнительно (если нужно):\\n\\nЕсли требуется обработать только списки чисел и проверить типы элементов, можно добавить дополнительную логику, но по условию задачи это не обязательно.\",\n  \"timestamp\": \"2026-05-26T16:28:27.365019\",\n  \"workspace\": \"C:\\\\my_repo\\\\nir_mas\\\\nir_mas\\\\demo_workspace\"\n}\n",
+  "error": null,
+  "baseline_quality": 1.0,
+  "buggy_quality": 0.75,
+  "quality_loss_percent": 25.0,
+  "is_robust": false,
+  "response_length": 1173,
+  "timestamp": "2026-05-26T16:28:27.522539"
+}

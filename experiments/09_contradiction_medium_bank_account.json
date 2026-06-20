@@ -1,0 +1,31 @@
+{
+  "experiment_id": "contradiction_medium_bank_account",
+  "task": {
+    "id": "bank_account",
+    "name": "Банковский счёт",
+    "prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance",
+    "keywords": [
+      "class",
+      "BankAccount",
+      "deposit",
+      "withdraw",
+      "get_balance",
+      "def"
+    ],
+    "difficulty": "medium",
+    "category": "oop",
+    "expected_output": "class with methods"
+  },
+  "bug_type": "contradiction",
+  "intensity": "medium",
+  "buggy_prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance но сделай максимально неэффективно",
+  "success": false,
+  "response": null,
+  "error": "Timeout 60s",
+  "baseline_quality": 0,
+  "buggy_quality": 0,
+  "quality_loss_percent": 100,
+  "is_robust": false,
+  "response_length": 0,
+  "timestamp": "2026-05-26T16:06:38.854759"
+}

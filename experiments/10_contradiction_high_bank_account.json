@@ -1,0 +1,31 @@
+{
+  "experiment_id": "contradiction_high_bank_account",
+  "task": {
+    "id": "bank_account",
+    "name": "Банковский счёт",
+    "prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance",
+    "keywords": [
+      "class",
+      "BankAccount",
+      "deposit",
+      "withdraw",
+      "get_balance",
+      "def"
+    ],
+    "difficulty": "medium",
+    "category": "oop",
+    "expected_output": "class with methods"
+  },
+  "bug_type": "contradiction",
+  "intensity": "high",
+  "buggy_prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance но не используй циклы (это обязательно)",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот реализация класса `BankAccount` на Python, удовлетворяющая всем указанным требованиям:\\n\\n```python\\nclass BankAccount:\\n    def __init__(self, balance=0):\\n        \\\"\\\"\\\"\\n        Инициализация банковского счёта.\\n        :param balance: Начальный баланс. По умолчанию 0.\\n        \\\"\\\"\\\"\\n        self.balance = balance\\n\\n    def deposit(self, amount):\\n        \\\"\\\"\\\"\\n        Вносит указанную сумму на счёт.\\n        :param amount: Сумма для депозита. Должна быть положительной.\\n        \\\"\\\"\\\"\\n        if amount < 0:\\n            raise ValueError(\\\"Сумма депозита не может быть отрицательной.\\\")\\n        self.balance += amount\\n\\n    def withdraw(self, amount):\\n        \\\"\\\"\\\"\\n        Снимает указанную сумму со счёта.\\n        :param amount: Сумма для снятия. Должна быть положительной.\\n        :return: True, если операция успешна, иначе False.\\n        \\\"\\\"\\\"\\n        if amount < 0:\\n            raise ValueError(\\\"Сумма снятия не может быть отрицательной.\\\")\\n        if amount > self.balance:\\n            return False\\n        self.balance -= amount\\n        return True\\n\\n    def get_balance(self):\\n        \\\"\\\"\\\"\\n        Возвращает текущий баланс.\\n        :return: Текущий баланс.\\n        \\\"\\\"\\\"\\n        return self.balance\\n```\\n\\n---\\n\\n### Основные моменты реализации:\\n\\n1. **Инициализация** (`__init__`):\\n   - Класс принимает начальный баланс, который по умолчанию равен 0.\\n   - Это позволяет создавать счёт с начальным депозитом или без него.\\n\\n2. **Метод `deposit`**:\\n   - Увеличивает баланс на заданную сумму.\\n   - Проверяет, чтобы сумма депозита была положительной.\\n   - В случае попытки внести отрицательную сумму генерируется исключение `ValueError`.\\n\\n3. **Метод `withdraw`**:\\n   - Уменьшает баланс на заданную сумму.\\n   - Проверяет, чтобы сумма снятия была положительной.\\n   - Также проверяет, чтобы сумма не превышала текущий баланс.\\n   - Если средств недостаточно, метод возвращает `False`. В противном ",
+  "error": null,
+  "baseline_quality": 0,
+  "buggy_quality": 1.0,
+  "quality_loss_percent": 0,
+  "is_robust": true,
+  "response_length": 3386,
+  "timestamp": "2026-05-26T16:07:26.022145"
+}

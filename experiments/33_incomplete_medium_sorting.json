@@ -1,0 +1,31 @@
+{
+  "experiment_id": "incomplete_medium_sorting",
+  "task": {
+    "id": "sorting",
+    "name": "Сортировка списка",
+    "prompt": "Напиши функцию для сортировки списка чисел на Python",
+    "keywords": [
+      "сортировка",
+      "sort",
+      "def",
+      "return",
+      "список",
+      "list"
+    ],
+    "difficulty": "medium",
+    "category": "algorithm",
+    "expected_output": "function that returns sorted list"
+  },
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "Напиши сортировки списка чисел на [пропущено]",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот примеры сортировки списка чисел на **Python**, **JavaScript** и **Java**. Если вы хотите увидеть реализацию на другом языке  уточните, и я дополню ответ.\\n\\n---\\n\\n### **Python**\\n\\n#### 1. **Встроенная сортировка (Timsort)**  \\n```python\\nnumbers = [5, 3, 8, 1, 4]\\nsorted_numbers = sorted(numbers)  # Сортировка по возрастанию\\nprint(sorted_numbers)\\n```\\n\\n#### 2. **Сортировка пузырьком**  \\n```python\\ndef bubble_sort(arr):\\n    n = len(arr)\\n    for i in range(n):\\n        for j in range(0, n - i - 1):\\n            if arr[j] > arr[j + 1]:\\n                arr[j], arr[j + 1] = arr[j + 1], arr[j]\\n    return arr\\n\\nnumbers = [5, 3, 8, 1, 4]\\nprint(bubble_sort(numbers))\\n```\\n\\n#### 3. **Быстрая сортировка (Quick Sort)**  \\n```python\\ndef quick_sort(arr):\\n    if len(arr) <= 1:\\n        return arr\\n    pivot = arr[len(arr) // 2]\\n    left = [x for x in arr if x < pivot]\\n    middle = [x for x in arr if x == pivot]\\n    right = [x for x in arr if x > pivot]\\n    return quick_sort(left) + middle + quick_sort(right)\\n\\nnumbers = [5, 3, 8, 1, 4]\\nprint(quick_sort(numbers))\\n```\\n\\n---\\n\\n### **JavaScript**\\n\\n#### 1. **Встроенная сортировка**  \\n```javascript\\nlet numbers = [5, 3, 8, 1, 4];\\nnumbers.sort((a, b) => a - b);  // Сортировка по возрастанию\\nconsole.log(numbers);\\n```\\n\\n#### 2. **Сортировка выбором**  \\n```javascript\\nfunction selectionSort(arr) {\\n    for (let i = 0; i < arr.length; i++) {\\n        let minIndex = i;\\n        for (let j = i + 1; j < arr.length; j++) {\\n            if (arr[j] < arr[minIndex]) {\\n                minIndex = j;\\n            }\\n        }\\n        [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];\\n    }\\n    return arr;\\n}\\n\\nlet numbers = [5, 3, 8, 1, 4];\\nconsole.log(selectionSort(numbers));\\n```\\n\\n---\\n\\n### **Java**\\n\\n#### 1. **Встроенная сортировка (Arrays.sort)**  \\n```java\\nimport java.util.Arrays;\\n\\npublic class Main {\\n    public static void main(String[] args) {\\n        i",
+  "error": null,
+  "baseline_quality": 1.0,
+  "buggy_quality": 0.75,
+  "quality_loss_percent": 25.0,
+  "is_robust": false,
+  "response_length": 3322,
+  "timestamp": "2026-05-26T16:23:58.832260"
+}

@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_high_tiangolo__fastapi-1122",
+  "task_id": "tiangolo__fastapi-1122",
+  "task_name": "SWE-bench: tiangolo__fastapi-1122",
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "Dependency Describe the does work `add_api_websocket_route` does not `dependency_overrides_provider` To app with websockets test with ### behavior taken the test the Environment Windows FastAPI version: - version: [неполные данные]",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Dependency Describe the does work `add_api_websocket_route` does not `depen...",
+  "error": null,
+  "baseline_quality": 0.39999999999999997,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 87.5,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 119.72806930541992,
+  "timestamp": "2026-06-19T17:59:56.926521"
+}

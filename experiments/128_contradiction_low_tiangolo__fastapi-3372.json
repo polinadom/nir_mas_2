@@ -1,0 +1,18 @@
+{
+  "experiment_id": "contradiction_low_tiangolo__fastapi-3372",
+  "task_id": "tiangolo__fastapi-3372",
+  "task_name": "SWE-bench: tiangolo__fastapi-3372",
+  "bug_type": "contradiction",
+  "intensity": "low",
+  "buggy_prompt": "Trio -  Python library for async concurrency and I/O\n**Description**\r\n\r\nHello!\r\nI'm using Hypercorn with uvloop.\r\nI'd like to use Hypercorn with trio, but the program doesn't start when i switch uvloop by trio.\r\n\r\nDo you have plans to implement trio?\r\n\r\nThank's!\r\n\r\nPS: Nice work.\r\n\n но не используй циклы (если возможно)",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Trio -  Python library for async concurrency and I/O\n**Description**\r\n\r\nHel...",
+  "error": null,
+  "baseline_quality": 0.30000000000000004,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 83.3,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 122.81939673423767,
+  "timestamp": "2026-06-19T21:44:38.946711"
+}

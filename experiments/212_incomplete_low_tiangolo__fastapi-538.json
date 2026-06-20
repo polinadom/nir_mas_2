@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_low_tiangolo__fastapi-538",
+  "task_id": "tiangolo__fastapi-538",
+  "task_name": "SWE-bench: tiangolo__fastapi-538",
+  "bug_type": "incomplete",
+  "intensity": "low",
+  "buggy_prompt": "route_class not preserved when calling APIRouter.include_router **Describe the bug** When calling `APIRouter.include_router`, the class of the included routes should be preserved. Right now, this is not the case -- the `route_class` of the parent router is used. This means that the `route_class` lost on inclusion if one isn't careful. Worse, it that even manually create a router route-types there is way to include that router in without changing the route type of some of the See the `include_typed_router` function from #521 for an example of how this currently requires a workaround. I have addressed this in the short PR #538, but wanted create an issue for discussion in case there is reason to the current behavior. [пропущено]",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: route_class not preserved when calling APIRouter.include_router **Describe ...",
+  "error": null,
+  "baseline_quality": 0.16999999999999998,
+  "buggy_quality": 0.16999999999999998,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 126.06160497665405,
+  "timestamp": "2026-06-20T00:19:37.520408"
+}

@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_medium_tiangolo__fastapi-621",
+  "task_id": "tiangolo__fastapi-621",
+  "task_name": "SWE-bench: tiangolo__fastapi-621",
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "204 No Content support for OpenAPI would like be in the endpoint decorator that endpoint will have no response No is documented in [swagger.io under the heading Empty Body. your request to a problem? Please This allow my `openapi-generator`-generated client to detect that will not be a response, and make use of an appropriate response (non-)decoder. It's not terribly hard issue to work by tweaking my generated client, it would things if I generate schema the content **Describe the solution you'd like** far, my favorite of an end-user-facing API would involve introducing a new response class (perhaps `NoContentResponse`) pass the endpoint decorator. (But not sure that would with if detecting response_class even generating OpenAPI spec.) ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: 204 No Content support for OpenAPI would like be in the endpoint decorator ...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 128.91054344177246,
+  "timestamp": "2026-06-20T00:40:16.477662"
+}

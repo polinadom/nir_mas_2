@@ -1,0 +1,31 @@
+{
+  "experiment_id": "incomplete_high_sorting",
+  "task": {
+    "id": "sorting",
+    "name": "Сортировка списка",
+    "prompt": "Напиши функцию для сортировки списка чисел на Python",
+    "keywords": [
+      "сортировка",
+      "sort",
+      "def",
+      "return",
+      "список",
+      "list"
+    ],
+    "difficulty": "medium",
+    "category": "algorithm",
+    "expected_output": "function that returns sorted list"
+  },
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "Напиши для сортировки [неполные данные]",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nДля сортировки данных, которые могут содержать пропущенные значения или неоднородные элементы, можно использовать функцию, которая учитывает отсутствующие ключи или значения. Ниже приведен пример реализации сортировки для списка словарей, где у некоторых элементов отсутствует ключ `'age'`. Элементы без ключа будут размещены в конце списка.\\n\\n### Пример кода:\\n```python\\ndef sort_incomplete_data(data, key, default=float('inf'), reverse=False):\\n    \\\"\\\"\\\"\\n    Сортирует список словарей по указанному ключу, учитывая пропущенные значения.\\n\\n    Параметры:\\n        data (list): Список словарей для сортировки.\\n        key (str): Ключ, по которому происходит сортировка.\\n        default: Значение по умолчанию для элементов, у которых ключ отсутствует.\\n        reverse (bool): Если True, сортировка идет в обратном порядке.\\n    \\\"\\\"\\\"\\n    def sort_key(item):\\n        return item.get(key, default)\\n    return sorted(data, key=sort_key, reverse=reverse)\\n\\n# Пример использования\\ndata = [\\n    {'name': 'Alice', 'age': 30},\\n    {'name': 'Bob'},  # Отсутствует ключ 'age'\\n    {'name': 'Charlie', 'age': 25}\\n]\\n\\n# Сортировка по возрасту, элементы без 'age' в конце\\nsorted_data = sort_incomplete_data(data, 'age')\\nprint(sorted_data)\\n```\\n\\n### Результат:\\n```python\\n[\\n    {'name': 'Charlie', 'age': 25},\\n    {'name': 'Alice', 'age': 30},\\n    {'name': 'Bob'}\\n]\\n```\\n\\n### Объяснение:\\n1. **`data`**  список словарей с разными данными.\\n2. **`key`**  ключ, по которому сортируем (например, `'age'`).\\n3. **`default`**  значение, которое подставляется, если ключ отсутствует. По умолчанию используется `float('inf')`, чтобы элементы без ключа шли в конец.\\n4. **`reverse`**  флаг для сортировки в обратном порядке.\\n\\n### Альтернативы:\\n- Чтобы элементы с пропущенными данными шли **в начало**, установите `default=-float('inf')`.\\n- Для других типов данных (например, объектов класса) можно использовать `getattr(item, key, default)`.\",\n  \"",
+  "error": null,
+  "baseline_quality": 1.0,
+  "buggy_quality": 1.0,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 2107,
+  "timestamp": "2026-05-26T16:24:50.251912"
+}

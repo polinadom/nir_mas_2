@@ -1,0 +1,31 @@
+{
+  "experiment_id": "baseline_tiangolo__fastapi-538",
+  "task": {
+    "id": "tiangolo__fastapi-538",
+    "name": "SWE-bench: tiangolo__fastapi-538",
+    "prompt": "route_class not preserved when calling APIRouter.include_router\n**Describe the bug**\r\n\r\nWhen calling `APIRouter.include_router`, the class of the included routes should be preserved. Right now, this is not the case -- the `route_class` of the parent router is used. This means that the `route_class` is lost on inclusion if one isn't careful. Worse, it means that even if you manually create a router with multiple route-types present, there is no way to include that router in another without changing the route type of some of the routes.\r\n\r\nSee the `include_typed_router` function from #521 for an example of how this currently requires a workaround.\r\n\r\nI have addressed this in the short PR #538, but wanted to create an issue for discussion in case there is any reason to preserve the current behavior.\n",
+    "keywords": [
+      "fix",
+      "bug",
+      "implement",
+      "change",
+      "update"
+    ],
+    "difficulty": "hard",
+    "category": "swe_bench",
+    "swe_metadata": {
+      "repo": "tiangolo/fastapi",
+      "base_commit": "f5ccb3c35d4ee87f61b0c03c8e4b0c24edffac60",
+      "patch": "diff --git a/fastapi/routing.py b/fastapi/routing.py\n--- a/fastapi/routing.py\n+++ b/fastapi/routing.py\n@@ -345,8 +345,10 @@ def add_api_route(\n         include_in_schema: bool = True,\n         response_class: Type[Response] = None,\n         name: str = None,\n+        route_class_override: Optional[Type[APIRoute]] = None,\n     ) -> None:\n-        route = self.route_class(\n+        route_class = route_class_override or self.route_class\n+        route = route_class(\n             path,\n             endpoint=endpoint,\n             response_model=response_model,\n@@ -484,6 +486,7 @@ def include_router(\n                     include_in_schema=route.include_in_schema,\n                     response_class=route.response_class or default_response_class,\n                     name=route.name,\n+                    route_class_override=type(route),\n                 )\n             elif isinstance(route, routing.Route):\n                 self.add_route(\n"
+    }
+  },
+  "bug_type": "none",
+  "intensity": "none",
+  "clean_prompt": "route_class not preserved when calling APIRouter.include_router\n**Describe the bug**\r\n\r\nWhen calling `APIRouter.include_router`, the class of the included routes should be preserved. Right now, this is not the case -- the `route_class` of the parent router is used. This means that the `route_class` is lost on inclusion if one isn't careful. Worse, it means that even if you manually create a router with multiple route-types present, there is no way to include that router in another without changing the route type of some of the routes.\r\n\r\nSee the `include_typed_router` function from #521 for an example of how this currently requires a workaround.\r\n\r\nI have addressed this in the short PR #538, but wanted to create an issue for discussion in case there is any reason to preserve the current behavior.\n",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: route_class not preserved when calling APIRouter.include_router\n**Describe ...",
+  "error": null,
+  "quality_score": 0.16999999999999998,
+  "response_length": 137,
+  "timestamp": "2026-06-20T00:17:31.454778"
+}

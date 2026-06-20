@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_low_tiangolo__fastapi-1547",
+  "task_id": "tiangolo__fastapi-1547",
+  "task_name": "SWE-bench: tiangolo__fastapi-1547",
+  "bug_type": "incomplete",
+  "intensity": "low",
+  "buggy_prompt": "I need a way to in the openapi spec ### feature request related to a problem I want be able use the generated openapi.json doc as it is and hook it up with a document publishing flow, but not able to because I have to add in information manually. The solution you would like Someway to specify at a global level what the base server url should be. ### alternatives you've considered Currently I'm doing this manually in the openapi.json by adding in something like - ``` \"servers\": [ { \"url\": \"http://example.com\" } ] ``` I don't mind submitting PR which enables this if someone guide me about the changes that need be made. One thing I saw was that the `get_openapi` method in `fastapi.openapi.utils`, doesn't expose a parameter for setting a value for `servers` key. [неполные данные]",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: I need a way to in the openapi spec ### feature request related to a proble...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 127.2038037776947,
+  "timestamp": "2026-06-19T19:08:34.768957"
+}

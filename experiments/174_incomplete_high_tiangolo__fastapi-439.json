@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_high_tiangolo__fastapi-439",
+  "task_id": "tiangolo__fastapi-439",
+  "task_name": "SWE-bench: tiangolo__fastapi-439",
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "OpenAPI: media_types of requestBody the bug** The for uses media_type defined one in Body **To path that parameter ones. media_type is is. from fastapi import from starlette status import = @app.post('/customers', customer_create(data: = {**data.dict(), **{'id': '1'}} return {'data': created_customer} openapi.json. ... post: responses: ... Customer Create content: # this should different schema: ``` behavior** The media_type path matches one: ```yaml post: Customer customer_create_api_customers_post requestBody: content: application/vnd+json.api: \"#/components/schemas/Body_customer_create_api_customers_post\" 10.14.6 ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: OpenAPI: media_types of requestBody the bug** The for uses media_type defin...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.15000000000000002,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 122.54092502593994,
+  "timestamp": "2026-06-19T23:10:24.734888"
+}

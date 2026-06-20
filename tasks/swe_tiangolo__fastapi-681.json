@@ -1,0 +1,19 @@
+{
+  "id": "tiangolo__fastapi-681",
+  "name": "SWE-bench: tiangolo__fastapi-681",
+  "prompt": "Async class method dependency raises a ValueError\n**Describe the bug**\r\nIf you use an async class method as a dependency, a `ValueError` is thrown. It doesn't happen for a non-async method.\r\n\r\nComplete error: `ValueError: [KeyError(<class 'coroutine'>), TypeError(\"'coroutine' object is not iterable\"), TypeError('vars() argument must have __dict__ attribute')]` (at `fastapi/encoders.py:106`)\r\n\r\n**To Reproduce**\r\n\r\n```py\r\nfrom fastapi import Depends, FastAPI\r\nfrom starlette.requests import Request\r\n\r\nclass DependencyClass:\r\n    async def async_dep(self, request: Request):\r\n        return True\r\n\r\n    def sync_dep(self, request: Request):\r\n        return True\r\n\r\napp = FastAPI()\r\ndependency = DependencyClass()\r\n\r\n# Error\r\n@app.get('/async-dep')\r\ndef async_dep(r=Depends(dependency.async_dep)):\r\n    return r\r\n\r\n# Everything is fine\r\n@app.get('/sync-dep')\r\ndef sync_dep(r=Depends(dependency.sync_dep)):\r\n    return r\r\n```\r\n\r\n**Expected behavior**\r\nThe async class method dependency should be called and its return value injected.\r\n\r\n**Environment:**\r\n - OS: macOS\r\n - FastAPI Version: 0.42.0\r\n- Python version: 3.7.2\r\n\r\n**Additional context**\r\nI believe the issue comes from here:\r\n\r\nhttps://github.com/tiangolo/fastapi/blob/65536cbf63318d111bf608960378d651b6c1596a/fastapi/dependencies/utils.py#L353-L359\r\n\r\nIndeed, `inspect.isfunction(call)` will return `False` in case of a class method. Hence, it is [sent to `run_in_threadpool`](https://github.com/tiangolo/fastapi/blob/65536cbf63318d111bf608960378d651b6c1596a/fastapi/dependencies/utils.py#L453-L456), which never awaits the coroutine, and we end up trying to serialize it instead of its result (hence the `ValueError`).\r\n\r\nChanging the check by:\r\n\r\n```py\r\nif inspect.isfunction(call) or inspect.ismethod(call):\r\n```\r\n\r\nsolves the issue. I can make a PR with the fix and unit tests if it helps.\n",
+  "keywords": [
+    "fix",
+    "bug",
+    "implement",
+    "change",
+    "update"
+  ],
+  "difficulty": "hard",
+  "category": "swe_bench",
+  "swe_metadata": {
+    "repo": "tiangolo/fastapi",
+    "base_commit": "c5f5e63810b002306f688b032ad9f134def60bea",
+    "patch": "diff --git a/fastapi/dependencies/utils.py b/fastapi/dependencies/utils.py\n--- a/fastapi/dependencies/utils.py\n+++ b/fastapi/dependencies/utils.py\n@@ -351,7 +351,7 @@ def add_param_to_fields(*, field: Field, dependant: Dependant) -> None:\n \n \n def is_coroutine_callable(call: Callable) -> bool:\n-    if inspect.isfunction(call):\n+    if inspect.isroutine(call):\n         return asyncio.iscoroutinefunction(call)\n     if inspect.isclass(call):\n         return False\n"
+  }
+}

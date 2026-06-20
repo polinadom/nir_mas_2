@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_medium_tiangolo__fastapi-1549",
+  "task_id": "tiangolo__fastapi-1549",
+  "task_name": "SWE-bench: tiangolo__fastapi-1549",
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "dependency_overrides does play scopes **Describe the When working with `Security()` the disappear when `app.dependency_overrides` is executed. The callable dealing with the scopes gets an empty list instead of the scopes. **To ```python from import Security, Depends from fastapi.security from starlette.testclient import app = get_user(required_scopes: SecurityScopes): print(required_scopes.scopes) return \"John Doe\" def data(): return [1,2,3] def return [3,4,5] @app.get(\"/test\") def str Security(get_user, scopes=[\"foo\", \"bar\"]), data = Depends(data)): data client TestClient(app) = response = client.get(\"/test\") [\"foo\", of and \"bar\"] ``` In the above example print the same scopes twice. Instead, before the prints the scpoes, but an empty list afterwards. **Environment:** - OS: Linux FastAPI Version - Python [пропущено]",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: dependency_overrides does play scopes **Describe the When working with `Sec...",
+  "error": null,
+  "baseline_quality": 0.15000000000000002,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 66.7,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 126.01688838005066,
+  "timestamp": "2026-06-19T19:28:38.048654"
+}

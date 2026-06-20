@@ -1,0 +1,31 @@
+{
+  "experiment_id": "baseline_tiangolo__fastapi-1549",
+  "task": {
+    "id": "tiangolo__fastapi-1549",
+    "name": "SWE-bench: tiangolo__fastapi-1549",
+    "prompt": "dependency_overrides does not play well with scopes\n**Describe the bug**\r\nWhen working with `Security()` dependencies, the scopes disappear when `app.dependency_overrides` is executed. The callable dealing with the scopes gets an empty list instead of the scopes.\r\n\r\n**To Reproduce**\r\n\r\n```python\r\nfrom fastapi import FastAPI, Header, Security, Depends\r\nfrom fastapi.security import SecurityScopes\r\n\r\nfrom starlette.testclient import TestClient\r\n\r\napp = FastAPI()\r\n\r\ndef get_user(required_scopes: SecurityScopes):\r\n    print(required_scopes.scopes)\r\n\r\n    return \"John Doe\"\r\n\r\ndef data():\r\n    return [1,2,3]\r\n\r\ndef other_data():\r\n    return [3,4,5]\r\n\r\n\r\n@app.get(\"/test\")\r\ndef test(user: str = Security(get_user, scopes=[\"foo\", \"bar\"]), data = Depends(data)):\r\n    return data\r\n\r\nclient = TestClient(app)\r\nresponse = client.get(\"/test\")\r\n\r\napp.dependency_overrides[data] = other_data\r\nresponse = client.get(\"/test\")\r\n\r\n# prints: [\"foo\", \"bar\"] and [] instead of [\"foo\", \"bar\"] and [\"foo\", \"bar\"]\r\n```\r\n\r\n**Expected behavior**\r\nIn the above example I expect `get_user()` to print the same scopes twice. Instead, before the `dependency_overrides` it prints the correct scpoes, but an empty list afterwards.\r\n\r\n**Environment:**\r\n - OS: Linux\r\n - FastAPI Version 0.43.0\r\n- Python 3.7.4\r\n\n",
+    "keywords": [
+      "fix",
+      "bug",
+      "implement",
+      "change",
+      "update"
+    ],
+    "difficulty": "hard",
+    "category": "swe_bench",
+    "swe_metadata": {
+      "repo": "tiangolo/fastapi",
+      "base_commit": "543ef7753aff639ad3aed7c153e42f719e361d38",
+      "patch": "diff --git a/fastapi/dependencies/utils.py b/fastapi/dependencies/utils.py\n--- a/fastapi/dependencies/utils.py\n+++ b/fastapi/dependencies/utils.py\n@@ -478,6 +478,7 @@ async def solve_dependencies(\n                 name=sub_dependant.name,\n                 security_scopes=sub_dependant.security_scopes,\n             )\n+            use_sub_dependant.security_scopes = sub_dependant.security_scopes\n \n         solved_result = await solve_dependencies(\n             request=request,\n"
+    }
+  },
+  "bug_type": "none",
+  "intensity": "none",
+  "clean_prompt": "dependency_overrides does not play well with scopes\n**Describe the bug**\r\nWhen working with `Security()` dependencies, the scopes disappear when `app.dependency_overrides` is executed. The callable dealing with the scopes gets an empty list instead of the scopes.\r\n\r\n**To Reproduce**\r\n\r\n```python\r\nfrom fastapi import FastAPI, Header, Security, Depends\r\nfrom fastapi.security import SecurityScopes\r\n\r\nfrom starlette.testclient import TestClient\r\n\r\napp = FastAPI()\r\n\r\ndef get_user(required_scopes: SecurityScopes):\r\n    print(required_scopes.scopes)\r\n\r\n    return \"John Doe\"\r\n\r\ndef data():\r\n    return [1,2,3]\r\n\r\ndef other_data():\r\n    return [3,4,5]\r\n\r\n\r\n@app.get(\"/test\")\r\ndef test(user: str = Security(get_user, scopes=[\"foo\", \"bar\"]), data = Depends(data)):\r\n    return data\r\n\r\nclient = TestClient(app)\r\nresponse = client.get(\"/test\")\r\n\r\napp.dependency_overrides[data] = other_data\r\nresponse = client.get(\"/test\")\r\n\r\n# prints: [\"foo\", \"bar\"] and [] instead of [\"foo\", \"bar\"] and [\"foo\", \"bar\"]\r\n```\r\n\r\n**Expected behavior**\r\nIn the above example I expect `get_user()` to print the same scopes twice. Instead, before the `dependency_overrides` it prints the correct scpoes, but an empty list afterwards.\r\n\r\n**Environment:**\r\n - OS: Linux\r\n - FastAPI Version 0.43.0\r\n- Python 3.7.4\r\n\n",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: dependency_overrides does not play well with scopes\n**Describe the bug**\r\nW...",
+  "error": null,
+  "quality_score": 0.15000000000000002,
+  "response_length": 137,
+  "timestamp": "2026-06-19T19:24:21.655428"
+}

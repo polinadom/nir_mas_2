@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_medium_tiangolo__fastapi-4871",
+  "task_id": "tiangolo__fastapi-4871",
+  "task_name": "SWE-bench: tiangolo__fastapi-4871",
+  "bug_type": "incomplete",
+  "intensity": "medium",
+  "buggy_prompt": "Support PEP 593 specifying dependencies and parameters ### check [x] I added a descriptive to this issue. * the GitHub search to find a similar issue and didn't find * [x] searched FastAPI with the integrated search. * [x] I already searched Google \"How X in and find any information. * [x] I already read and all tutorial in the docs and didn't [x] I it is related FastAPI but to * [x] already checked if related FastAPI to * [x] already if it is not related to FastAPI to [ReDoc](https://github.com/Redocly/redoc). * [x] After submitting this, I commit to: issues with until I 2 issues I help someone a to there. Or, I already hit \"watch\" button this repository to receive I commit to help at least 2 people that questions in the * Pull Request for a confirmed bug. ### I propse to transforming: <!-- Replace the your own self-contained, minimal, reproducible, example ```Python Optional fastapi import FastAPI app FastAPI() common_parameters(q: = skip: int = 0, int = 100): return {\"q\": q, \"skip\": skip, \"limit\": limit} @app.get(\"/items/\") def dict = Depends(common_parameters)): commons ``` to ```Python from typing import Annotated, Optional from fastapi import Depends, app async def None, skip: int 0, int = 100): return skip, \"limit\": @app.get(\"/items/\") async def read_items(commons: Annotated[dict, Depends(common_parameters)]): commons Discussion [PEP Added `Annotated` for adding additional annotations beyond think `Depends`, `Body` likes well with the additional this This would also make values less awkward: ```python @app.get(\"/items/\") read_items(q: Optional[str] Query(None, max_length=50)): Could become ```python @app.get(\"/items/\") async read_items(q: Annotated[Optional[str], = None): ``` This will also solve issue mentioned [in the of parameter ordering. it is sometimes to use same as both FastAPI dependency and a regular In these cases, `= Depends(...)` is default value, if you forget pass parameter error caught your IDE. Worse, is not caught at runtime because Python will pass along the `Depends` object. This probably cause an error down road, may silently succeed cases. I'm to implement this if you think a good idea. ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Support PEP 593 specifying dependencies and parameters ### check [x] I adde...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 119.38908910751343,
+  "timestamp": "2026-06-19T23:44:14.293965"
+}

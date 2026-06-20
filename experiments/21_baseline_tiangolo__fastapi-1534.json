@@ -1,0 +1,31 @@
+{
+  "experiment_id": "baseline_tiangolo__fastapi-1534",
+  "task": {
+    "id": "tiangolo__fastapi-1534",
+    "name": "SWE-bench: tiangolo__fastapi-1534",
+    "prompt": "Support HTTPStatus\n### Is your feature request related to a problem\r\n\r\nWe typically use [HTTPStatus](https://docs.python.org/3/library/http.html#http.HTTPStatus) in our code. When used as a value for `status_code` in path functions this results in the string literal in the documentation and when \"trying\" the response is shown as undocumented because it doesn't match the actual response code\r\n\r\n### The solution you would like\r\n\r\nI want to use HTTPStatus enum values and have it work exactly like the `starlette.status` pseudo enum values\r\n\r\n\r\n\n",
+    "keywords": [
+      "fix",
+      "bug",
+      "implement",
+      "change",
+      "update"
+    ],
+    "difficulty": "hard",
+    "category": "swe_bench",
+    "swe_metadata": {
+      "repo": "tiangolo/fastapi",
+      "base_commit": "543ef7753aff639ad3aed7c153e42f719e361d38",
+      "patch": "diff --git a/fastapi/routing.py b/fastapi/routing.py\n--- a/fastapi/routing.py\n+++ b/fastapi/routing.py\n@@ -1,4 +1,5 @@\n import asyncio\n+import enum\n import inspect\n from typing import Any, Callable, Dict, List, Optional, Sequence, Set, Type, Union\n \n@@ -295,6 +296,9 @@ def __init__(\n         dependency_overrides_provider: Any = None,\n         callbacks: Optional[List[\"APIRoute\"]] = None,\n     ) -> None:\n+        # normalise enums e.g. http.HTTPStatus\n+        if isinstance(status_code, enum.IntEnum):\n+            status_code = int(status_code)\n         self.path = path\n         self.endpoint = endpoint\n         self.name = get_name(endpoint) if name is None else name\n"
+    }
+  },
+  "bug_type": "none",
+  "intensity": "none",
+  "clean_prompt": "Support HTTPStatus\n### Is your feature request related to a problem\r\n\r\nWe typically use [HTTPStatus](https://docs.python.org/3/library/http.html#http.HTTPStatus) in our code. When used as a value for `status_code` in path functions this results in the string literal in the documentation and when \"trying\" the response is shown as undocumented because it doesn't match the actual response code\r\n\r\n### The solution you would like\r\n\r\nI want to use HTTPStatus enum values and have it work exactly like the `starlette.status` pseudo enum values\r\n\r\n\r\n\n",
+  "success": true,
+  "response": "```python\n\"\"\"\nhttp_status_helper.py\n\nUtility for working with HTTP status codes.  It builds on the standard\n`http.HTTPStatus` enum and adds support for custom status codes.\n\"\"\"\n\nfrom __future__ import annotations\n\nimport sys\nfrom http import HTTPStatus\nfrom typing import Dict, Final\n\n\nclass HttpStatusError(ValueError):\n    \"\"\"Raised when an unknown HTTP status code is requested.\"\"\"\n\n\nclass HttpStatusHelper:\n    \"\"\"\n    Helper class that provides common operations for HTTP status codes\n    and allows registration of custom codes.\n    \"\"\"\n\n    # Mapping of custom codes to their reason phrases\n    _custom_statuses: Dict[int, str] = {}\n\n    @classmethod\n    def register_custom_status(cls, code: int, reason: str) -> None:\n        \"\"\"\n        Register a custom HTTP status code.\n\n        Args:\n            code: Integer status code (must be >= 100 and <= 599).\n            reason: Human‑readable reason phrase.\n\n        Raises:\n            ValueError: If the code is out of the valid HTTP range.\n        \"\"\"\n        if not (100 <= code <= 599):\n            raise ValueError(\"HTTP status code must be between 100 and 599.\")\n        cls._custom_statuses[code] = reason\n\n    @classmethod\n    def _lookup_reason(cls, code: int) -> str:\n        \"\"\"\n        Return the reason phrase for a given status code.\n\n        Args:\n            code: HTTP status code.\n\n        Returns:\n            Reason phrase as a string.\n\n        Raises:\n            HttpStatusError: If the code is unknown.\n        \"\"\"\n        try:\n            # First try the standard enum\n            return HTTPStatus(code).phrase\n        except ValueError:\n            # Fallback to custom registry\n            if code in cls._custom_statuses:\n                return cls._custom_statuses[code]\n            raise HttpStatusError(f\"Unknown HTTP status code: {code}\") from None\n\n    @classmethod\n    def get_reason(cls, code: int) -> str:\n        \"\"\"Public wrapper for retrieving a reason phrase.\"\"\"\n        return cls._lookup_reason(code)\n\n    @classmethod\n    def is_success(cls, code: int) -> bool:\n        \"\"\"Return True if the code is in the 2xx range.\"\"\"\n        return 200 <= code <= 299\n\n    @classmethod\n    def is_redirect(cls, code: int) -> bool:\n        \"\"\"Return True if the code is in the 3xx range.\"\"\"\n        return 300 <= code <= 399\n\n    @classmethod\n    def is_client_error(cls, code: int) -> bool:\n        \"\"\"Return True if the code is in the 4xx range.\"\"\"\n        return 400 <= code <= 499\n\n    @classmethod\n    def is_server_error(cls, code: int) -> bool:\n        \"\"\"Return True if the code is in the 5xx range.\"\"\"\n        return 500 <= code <= 599\n\n    @classmethod\n    def categorize(cls, code: int) -> str:\n        \"\"\"\n        Return a textual category for the status code.\n\n        Possible returns: 'informational', 'success', 'redirect',\n        'client_error', 'server_error', or 'unknown'.\n        \"\"\"\n        if 100 <= code <= 199:\n            return \"informational\"\n        if cls.is_success(code):\n        ",
+  "error": null,
+  "quality_score": 0.30000000000000004,
+  "response_length": 4216,
+  "timestamp": "2026-06-19T18:29:59.729147"
+}

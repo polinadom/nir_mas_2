@@ -1,0 +1,18 @@
+{
+  "experiment_id": "contradiction_high_tiangolo__fastapi-1122",
+  "task_id": "tiangolo__fastapi-1122",
+  "task_name": "SWE-bench: tiangolo__fastapi-1122",
+  "bug_type": "contradiction",
+  "intensity": "high",
+  "buggy_prompt": "Dependency override websocket broken\n### Describe the bug\r\n\r\nDependency override does not work for websockets. \r\n\r\nThe function `add_api_websocket_route` does not add `dependency_overrides_provider` to `APIWebSocketRoute`.\r\n\r\n### To Reproduce\r\n\r\nCreate a simple app with websockets and test it with override.\r\n\r\n### Expected behavior\r\n\r\nThe overrides should be taken into account, but the test uses the original dependency. \r\n\r\n### Environment\r\n\r\n- OS: Windows\r\n- FastAPI version: 0.49.0\r\n- Python version: 3.6.8\r\n\n при этом не используй стандартные библиотеки (это обязательно)",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: Dependency override websocket broken\n### Describe the bug\r\n\r\nDependency ove...",
+  "error": null,
+  "baseline_quality": 0.39999999999999997,
+  "buggy_quality": 0.15000000000000002,
+  "quality_loss_percent": 62.5,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 79.73751735687256,
+  "timestamp": "2026-06-19T18:10:17.359088"
+}

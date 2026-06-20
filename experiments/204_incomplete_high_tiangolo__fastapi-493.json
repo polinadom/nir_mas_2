@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_high_tiangolo__fastapi-493",
+  "task_id": "tiangolo__fastapi-493",
+  "task_name": "SWE-bench: tiangolo__fastapi-493",
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "references package bug** Starting app following import File \".../lib/site-packages/fastapi/__init__.py\", 7, <module> .applications import line <module> fastapi import line 7, fastapi.dependencies.models \".../lib/site-packages/fastapi/dependencies/models.py\", line <module> from fastapi.security.base File 2, in <module> File in File 5, <module> import ModuleNotFoundError: ``` behavior** should start import - and - 0.38.0 **Additional the requests be with import in 5 of module mistakenly the 'requests' package the a FastAPI app displays following ```python fastapi import \".../lib/site-packages/fastapi/__init__.py\", 7, in <module> from File line 3, from fastapi import \".../lib/site-packages/fastapi/routing.py\", 7, <module> import line 3, in from fastapi.security.base SecurityBase File line in from in <module> from File \".../lib/site-packages/fastapi/exceptions.py\", in requests Request module **Expected behavior** The start without **Environment:** Windows, FastAPI Version: **Additional the Request` starlette.requests ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: references package bug** Starting app following import File \".../lib/site-p...",
+  "error": null,
+  "baseline_quality": 0.5,
+  "buggy_quality": 0.15000000000000002,
+  "quality_loss_percent": 70.0,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 128.63014769554138,
+  "timestamp": "2026-06-20T00:05:08.727029"
+}

@@ -1,0 +1,10 @@
+﻿bug_type,level,avg_loss_percent,n_experiments
+incomplete,low,8.2,32
+incomplete,medium,13.2,32
+incomplete,high,19.5,32
+noise,low,10.1,32
+noise,medium,7.5,32
+noise,high,9.7,32
+contradiction,low,12.8,32
+contradiction,medium,16.7,32
+contradiction,high,13.6,32

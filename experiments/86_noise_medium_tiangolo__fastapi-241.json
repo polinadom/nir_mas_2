@@ -1,0 +1,18 @@
+{
+  "experiment_id": "noise_medium_tiangolo__fastapi-241",
+  "task_id": "tiangolo__fastapi-241",
+  "task_name": "SWE-bench: tiangolo__fastapi-241",
+  "bug_type": "noise",
+  "intensity": "medium",
+  "buggy_prompt": "make swagger_ui_html, redoc_html and openapi.json handled by async function?\n**Is your feature request related to a problem? Please describe.**\r\nI add a loop on all my router of my app to check if the handler are all coroutine function to get better performance, but I fount that swagger_ui_html, redoc_html and openapi.json are handled by normal function.\r\n\r\nhttps://github.com/tiangolo/fastapi/blob/56ab106bbbf8054af437821c6683491ca7952c3b/fastapi/applications.py#L80-L86\r\n\r\n**Describe the solution you'd like**\r\n\r\nI'm wondering if its possible to handle these 3 router with async function, as its only a simple `getattr` operator or concat string.\r\n\r\nhttps://github.com/tiangolo/fastapi/blob/56ab106bbbf8054af437821c6683491ca7952c3b/fastapi/applications.py#L78\r\n\r\n```python\r\n    def setup(self) -> None:\r\n        if self.openapi_url:\r\n\r\n            async def openapi_handler(req):\r\n                return JSONResponse(self.openapi())\r\n\r\n            self.add_route(\r\n                self.openapi_url,\r\n                openapi_handler,\r\n                include_in_schema=False,\r\n            )\r\n```\r\n**Describe alternatives you've considered**\r\n\r\nDisable default handlers and I write async handlers by my self to replace inner handlers.\r\n\r\n**Additional context**\r\n\r\nIn `Starlette`, if a handler is not coroutine function, it will be executed by `loop.run_in_executor` . So this could improve performance a litte bit.(In my test, about 2800 r/s to 3200r/s)\r\n\r\n \n ошибка",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: make swagger_ui_html, redoc_html and openapi.json handled by async function...",
+  "error": null,
+  "baseline_quality": 0.05,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 137,
+  "elapsed_time": 85.69301629066467,
+  "timestamp": "2026-06-19T20:27:56.657008"
+}

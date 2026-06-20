@@ -1,0 +1,19 @@
+{
+  "id": "tiangolo__fastapi-1534",
+  "name": "SWE-bench: tiangolo__fastapi-1534",
+  "prompt": "Support HTTPStatus\n### Is your feature request related to a problem\r\n\r\nWe typically use [HTTPStatus](https://docs.python.org/3/library/http.html#http.HTTPStatus) in our code. When used as a value for `status_code` in path functions this results in the string literal in the documentation and when \"trying\" the response is shown as undocumented because it doesn't match the actual response code\r\n\r\n### The solution you would like\r\n\r\nI want to use HTTPStatus enum values and have it work exactly like the `starlette.status` pseudo enum values\r\n\r\n\r\n\n",
+  "keywords": [
+    "fix",
+    "bug",
+    "implement",
+    "change",
+    "update"
+  ],
+  "difficulty": "hard",
+  "category": "swe_bench",
+  "swe_metadata": {
+    "repo": "tiangolo/fastapi",
+    "base_commit": "543ef7753aff639ad3aed7c153e42f719e361d38",
+    "patch": "diff --git a/fastapi/routing.py b/fastapi/routing.py\n--- a/fastapi/routing.py\n+++ b/fastapi/routing.py\n@@ -1,4 +1,5 @@\n import asyncio\n+import enum\n import inspect\n from typing import Any, Callable, Dict, List, Optional, Sequence, Set, Type, Union\n \n@@ -295,6 +296,9 @@ def __init__(\n         dependency_overrides_provider: Any = None,\n         callbacks: Optional[List[\"APIRoute\"]] = None,\n     ) -> None:\n+        # normalise enums e.g. http.HTTPStatus\n+        if isinstance(status_code, enum.IntEnum):\n+            status_code = int(status_code)\n         self.path = path\n         self.endpoint = endpoint\n         self.name = get_name(endpoint) if name is None else name\n"
+  }
+}

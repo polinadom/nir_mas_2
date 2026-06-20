@@ -1,0 +1,31 @@
+{
+  "experiment_id": "noise_high_sorting",
+  "task": {
+    "id": "sorting",
+    "name": "Сортировка списка",
+    "prompt": "Напиши функцию для сортировки списка чисел на Python",
+    "keywords": [
+      "сортировка",
+      "sort",
+      "def",
+      "return",
+      "список",
+      "list"
+    ],
+    "difficulty": "medium",
+    "category": "algorithm",
+    "expected_output": "function that returns sorted list"
+  },
+  "bug_type": "noise",
+  "intensity": "high",
+  "buggy_prompt": "vwzudwby Напиши функцию для сортировки списка чисел на Python",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот функция для сортировки списка чисел на Python с использованием алгоритма быстрой сортировки (Quick Sort):\\n\\n```python\\ndef quicksort(arr):\\n    \\\"\\\"\\\"\\n    Сортирует список чисел по возрастанию с использованием алгоритма быстрой сортировки.\\n    \\n    Args:\\n        arr (list): Список чисел для сортировки.\\n        \\n    Returns:\\n        list: Отсортированный список чисел.\\n    \\\"\\\"\\\"\\n    if len(arr) <= 1:\\n        return arr\\n    \\n    # Выбираем опорный элемент\\n    pivot = arr[len(arr) // 2]\\n    \\n    # Разделяем список на элементы меньше, равные и больше опорного\\n    left = [x for x in arr if x < pivot]\\n    middle = [x for x in arr if x == pivot]\\n    right = [x for x in arr if x > pivot]\\n    \\n    # Рекурсивно сортируем подсписки и объединяем их\\n    return quicksort(left) + middle + quicksort(right)\\n\\n# Пример использования\\nif __name__ == \\\"__main__\\\":\\n    numbers = [5, 3, 8, 4, 2]\\n    sorted_numbers = quicksort(numbers)\\n    print(\\\"Отсортированный список:\\\", sorted_numbers)\\n```\\n\\n### Описание работы функции:\\n1. **Базовый случай рекурсии**: Если длина списка меньше или равна 1, он уже отсортирован, поэтому возвращаем его как есть.\\n2. **Выбор опорного элемента**: Используется средний элемент списка для разделения.\\n3. **Разделение списка**: Элементы меньше опорного отправляются в подсписок `left`, равные  в `middle`, а большие  в `right`.\\n4. **Рекурсивная сортировка**: Применяется рекурсия к подспискам `left` и `right`.\\n5. **Объединение результатов**: Сортированные подсписки объединяются с `middle`, чтобы получить окончательный отсортированный список.\\n\\n### Пример вывода:\\n```\\nОтсортированный список: [2, 3, 4, 5, 8]\\n```\\n\\nЭта реализация эффективна для большинства случаев и демонстрирует понимание принципа работы алгоритма быстрой сортировки.\",\n  \"timestamp\": \"2026-05-26T16:26:40.042218\",\n  \"workspace\": \"C:\\\\my_repo\\\\nir_mas\\\\nir_mas\\\\demo_workspace\"\n}\n",
+  "error": null,
+  "baseline_quality": 1.0,
+  "buggy_quality": 1.0,
+  "quality_loss_percent": 0.0,
+  "is_robust": true,
+  "response_length": 1957,
+  "timestamp": "2026-05-26T16:26:40.258135"
+}

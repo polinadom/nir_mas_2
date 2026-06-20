@@ -1,0 +1,30 @@
+{
+  "experiment_id": "incomplete_high_factorial",
+  "task": {
+    "id": "factorial",
+    "name": "Факториал числа",
+    "prompt": "Напиши функцию для вычисления факториала числа на Python",
+    "keywords": [
+      "факториал",
+      "factorial",
+      "def",
+      "return",
+      "function"
+    ],
+    "difficulty": "easy",
+    "category": "math",
+    "expected_output": "function that returns factorial"
+  },
+  "bug_type": "incomplete",
+  "intensity": "high",
+  "buggy_prompt": "Напиши функцию Python ...",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nПожалуйста, уточните, что должна делать функция: какие параметры она принимает, какую задачу решает и в каком формате должен быть результат. Например:\\n\\n- Обработка данных (фильтрация, сортировка, преобразование)?\\n- Математические вычисления?\\n- Работа с текстом/строками?\\n- Взаимодействие с файлами или API?\\n- Другое...\\n\\nПример уточнения:  \\n\\\"Напиши функцию, которая принимает список чисел и возвращает среднее значение.\\\"\",\n  \"timestamp\": \"2026-05-26T16:09:20.009508\",\n  \"workspace\": \"C:\\\\my_repo\\\\nir_mas\\\\nir_mas\\\\demo_workspace\"\n}\n",
+  "error": null,
+  "baseline_quality": 0.8571428571428571,
+  "buggy_quality": 0.14285714285714285,
+  "quality_loss_percent": 83.3,
+  "is_robust": false,
+  "response_length": 585,
+  "timestamp": "2026-05-26T16:09:20.161706"
+}

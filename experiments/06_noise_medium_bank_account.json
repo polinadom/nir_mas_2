@@ -1,0 +1,31 @@
+{
+  "experiment_id": "noise_medium_bank_account",
+  "task": {
+    "id": "bank_account",
+    "name": "Банковский счёт",
+    "prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance",
+    "keywords": [
+      "class",
+      "BankAccount",
+      "deposit",
+      "withdraw",
+      "get_balance",
+      "def"
+    ],
+    "difficulty": "medium",
+    "category": "oop",
+    "expected_output": "class with methods"
+  },
+  "bug_type": "noise",
+  "intensity": "medium",
+  "buggy_prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance jnxrbk",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот реализация класса `BankAccount` на Python, включающего методы `deposit`, `withdraw` и `get_balance`:\\n\\n```python\\nclass BankAccount:\\n    def __init__(self, balance=0):\\n        if balance < 0:\\n            raise ValueError(\\\"Начальный баланс не может быть отрицательным\\\")\\n        self.balance = balance\\n\\n    def deposit(self, amount):\\n        if amount <= 0:\\n            raise ValueError(\\\"Сумма депозита должна быть положительной\\\")\\n        self.balance += amount\\n\\n    def withdraw(self, amount):\\n        if amount <= 0:\\n            raise ValueError(\\\"Сумма снятия должна быть положительной\\\")\\n        if amount > self.balance:\\n            raise ValueError(\\\"Недостаточно средств на счете\\\")\\n        self.balance -= amount\\n\\n    def get_balance(self):\\n        return self.balance\\n```\\n\\n### Пример использования класса:\\n\\n```python\\n# Создаем банковский счет с начальным балансом 100\\naccount = BankAccount(100)\\n\\n# Вносим депозит\\naccount.deposit(50)\\nprint(\\\"Баланс после депозита:\\\", account.get_balance())  # Вывод: 150\\n\\n# Снимаем средства\\naccount.withdraw(70)\\nprint(\\\"Баланс после снятия:\\\", account.get_balance())  # Вывод: 80\\n\\n# Попытка снять больше, чем есть на счете\\ntry:\\n    account.withdraw(100)\\nexcept ValueError as e:\\n    print(\\\"Ошибка:\\\", e)  # Вывод: Ошибка: Недостаточно средств на счете\\n\\n# Получаем текущий баланс\\nprint(\\\"Текущий баланс:\\\", account.get_balance())  # Вывод: 80\\n```\\n\\n### Описание функциональности:\\n\\n1. **Конструктор `__init__`**:\\n   - Инициализирует баланс, который по умолчанию равен 0.\\n   - Если переданное начальное значение отрицательное, выбрасывается исключение `ValueError`.\\n\\n2. **Метод `deposit(amount)`**:\\n   - Добавляет указанную сумму к балансу.\\n   - Если сумма отрицательна, выбрасывается исключение `ValueError`.\\n\\n3. **Метод `withdraw(amount)`**:\\n   - Снимает указанную сумму с баланса.\\n   - Если сумма отрицательна или превышает текущий баланс, выбрасываетс",
+  "error": null,
+  "baseline_quality": 0,
+  "buggy_quality": 1.0,
+  "quality_loss_percent": 0,
+  "is_robust": true,
+  "response_length": 2205,
+  "timestamp": "2026-05-26T16:04:07.874537"
+}

@@ -1,0 +1,31 @@
+{
+  "experiment_id": "baseline_tiangolo__fastapi-17",
+  "task": {
+    "id": "tiangolo__fastapi-17",
+    "name": "SWE-bench: tiangolo__fastapi-17",
+    "prompt": "starlette update breaks routing\n[starlette 0.9.11](https://pypi.org/project/starlette/0.9.11/) breaks fastapi routing\r\nI'm currently working around this by enforcing starlette==0.9.10\n",
+    "keywords": [
+      "fix",
+      "bug",
+      "implement",
+      "change",
+      "update"
+    ],
+    "difficulty": "hard",
+    "category": "swe_bench",
+    "swe_metadata": {
+      "repo": "tiangolo/fastapi",
+      "base_commit": "014c7df142baf0e5cade2c452edfc0c138fda398",
+      "patch": "diff --git a/fastapi/routing.py b/fastapi/routing.py\n--- a/fastapi/routing.py\n+++ b/fastapi/routing.py\n@@ -18,7 +18,7 @@\n from starlette.formparsers import UploadFile\n from starlette.requests import Request\n from starlette.responses import JSONResponse, Response\n-from starlette.routing import get_name, request_response\n+from starlette.routing import compile_path, get_name, request_response\n from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY\n \n \n@@ -149,9 +149,7 @@ def __init__(\n         self.include_in_schema = include_in_schema\n         self.content_type = content_type\n \n-        self.path_regex, self.path_format, self.param_convertors = self.compile_path(\n-            path\n-        )\n+        self.path_regex, self.path_format, self.param_convertors = compile_path(path)\n         assert inspect.isfunction(endpoint) or inspect.ismethod(\n             endpoint\n         ), f\"An endpoint must be a function or method\"\n"
+    }
+  },
+  "bug_type": "none",
+  "intensity": "none",
+  "clean_prompt": "starlette update breaks routing\n[starlette 0.9.11](https://pypi.org/project/starlette/0.9.11/) breaks fastapi routing\r\nI'm currently working around this by enforcing starlette==0.9.10\n",
+  "success": true,
+  "response": "```python\n\"\"\"starlette_routing_fix.py\n\nA minimal Starlette application that demonstrates a robust routing setup\ncompatible with Starlette 0.9.11 (and newer). The example includes:\n\n* Proper use of ``starlette.routing.Router`` to avoid routing breakage after\n  updates.\n* Typed request handlers with clear error handling.\n* A simple ``uvicorn`` entry‑point for quick testing.\n\nRun the example::\n\n    python starlette_routing_fix.py\n\"\"\"\n\nfrom __future__ import annotations\n\nimport json\nimport logging\nfrom typing import Any, Dict\n\nfrom starlette.applications import Starlette\nfrom starlette.requests import Request\nfrom starlette.responses import JSONResponse, PlainTextResponse\nfrom starlette.routing import Route, Router\nfrom starlette.exceptions import HTTPException\n\n# --------------------------------------------------------------------------- #\n# Logging configuration (useful when debugging routing issues)\n# --------------------------------------------------------------------------- #\nlogging.basicConfig(\n    level=logging.INFO,\n    format=\"%(asctime)s %(levelname)s %(name)s %(message)s\",\n)\nlogger = logging.getLogger(__name__)\n\n# --------------------------------------------------------------------------- #\n# Helper utilities\n# --------------------------------------------------------------------------- #\ndef _json_response(data: Dict[str, Any], status_code: int = 200) -> JSONResponse:\n    \"\"\"Create a JSON response with proper content‑type and error handling.\"\"\"\n    try:\n        return JSONResponse(data, status_code=status_code)\n    except TypeError as exc:\n        # ``JSONResponse`` raises ``TypeError`` for non‑serialisable objects.\n        logger.error(\"Failed to serialize response data: %s\", exc)\n        raise HTTPException(status_code=500, detail=\"Internal Server Error\") from exc\n\n\n# --------------------------------------------------------------------------- #\n# Request handlers\n# --------------------------------------------------------------------------- #\nasync def homepage(request: Request) -> PlainTextResponse:\n    \"\"\"Root endpoint – returns a simple greeting.\"\"\"\n    return PlainTextResponse(\"Welcome to the Starlette routing demo!\")\n\n\nasync def echo(request: Request) -> JSONResponse:\n    \"\"\"\n    Echo endpoint – returns the JSON body sent by the client.\n\n    Expected payload (example):\n        {\"message\": \"Hello\"}\n    \"\"\"\n    try:\n        payload = await request.json()\n    except json.JSONDecodeError as exc:\n        logger.warning(\"Invalid JSON payload: %s\", exc)\n        raise HTTPException(status_code=400, detail=\"Invalid JSON\") from exc\n\n    return _json_response({\"received\": payload})\n\n\nasync def get_item(request: Request) -> JSONResponse:\n    \"\"\"\n    Path‑parameter endpoint – demonstrates proper ``{param}`` handling.\n\n    URL pattern: ``/items/{item_id}``\n    \"\"\"\n    item_id = request.path_params.get(\"item_id\")\n    if not item_id:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n\n    # Simulate a data lookup (replace with re",
+  "error": null,
+  "quality_score": 0.6,
+  "response_length": 4897,
+  "timestamp": "2026-06-19T20:00:15.209657"
+}

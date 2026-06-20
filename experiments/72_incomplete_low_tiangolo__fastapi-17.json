@@ -1,0 +1,18 @@
+{
+  "experiment_id": "incomplete_low_tiangolo__fastapi-17",
+  "task_id": "tiangolo__fastapi-17",
+  "task_name": "SWE-bench: tiangolo__fastapi-17",
+  "bug_type": "incomplete",
+  "intensity": "low",
+  "buggy_prompt": "starlette update breaks routing [starlette 0.9.11](https://pypi.org/project/starlette/0.9.11/) breaks I'm currently working around this by enforcing starlette==0.9.10 ...",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: starlette update breaks routing [starlette 0.9.11](https://pypi.org/project...",
+  "error": null,
+  "baseline_quality": 0.6,
+  "buggy_quality": 0.15000000000000002,
+  "quality_loss_percent": 75.0,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 123.78518056869507,
+  "timestamp": "2026-06-19T20:02:19.000850"
+}

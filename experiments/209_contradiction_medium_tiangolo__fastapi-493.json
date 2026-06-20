@@ -1,0 +1,18 @@
+{
+  "experiment_id": "contradiction_medium_tiangolo__fastapi-493",
+  "task_id": "tiangolo__fastapi-493",
+  "task_name": "SWE-bench: tiangolo__fastapi-493",
+  "bug_type": "contradiction",
+  "intensity": "medium",
+  "buggy_prompt": "FastAPI exceptions module mistakenly references the 'requests' package\n**Describe the bug**\r\nStarting up a FastAPI 0.38.0 app displays the following error:\r\n\r\n```python\r\nfrom fastapi import FastAPI\r\n  File \".../lib/site-packages/fastapi/__init__.py\", line 7, in <module>\r\n    from .applications import FastAPI\r\n  File \".../lib/site-packages/fastapi/applications.py\", line 3, in <module>\r\n    from fastapi import routing\r\n  File \".../lib/site-packages/fastapi/routing.py\", line 7, in <module>\r\n    from fastapi.dependencies.models import Dependant\r\n  File \".../lib/site-packages/fastapi/dependencies/models.py\", line 3, in <module>\r\n    from fastapi.security.base import SecurityBase\r\n  File \".../lib/site-packages/fastapi/security/__init__.py\", line 2, in <module>\r\n    from .http import (\r\n  File \".../lib/site-packages/fastapi/security/http.py\", line 5, in <module>\r\n    from fastapi.exceptions import HTTPException\r\n  File \".../lib/site-packages/fastapi/exceptions.py\", line 5, in <module>\r\n    from requests import Request\r\nModuleNotFoundError: No module named 'requests'\r\n```\r\n\r\n**Expected behavior**\r\nThe app should start without import errors.\r\n\r\n**Environment:**\r\n - OS: Linux, Windows, and macOS\r\n - FastAPI Version: 0.38.0\r\n\r\n**Additional context**\r\nIt's likely the `from requests import Request` should be replaced with `from starlette.requests import Request` in line 5 of `fastapi/exceptions.py`\nFastAPI exceptions module mistakenly references the 'requests' package\n**Describe the bug**\r\nStarting up a FastAPI 0.38.0 app displays the following error:\r\n\r\n```python\r\nfrom fastapi import FastAPI\r\n  File \".../lib/site-packages/fastapi/__init__.py\", line 7, in <module>\r\n    from .applications import FastAPI\r\n  File \".../lib/site-packages/fastapi/applications.py\", line 3, in <module>\r\n    from fastapi import routing\r\n  File \".../lib/site-packages/fastapi/routing.py\", line 7, in <module>\r\n    from fastapi.dependencies.models import Dependant\r\n  File \".../lib/site-packages/fastapi/dependencies/models.py\", line 3, in <module>\r\n    from fastapi.security.base import SecurityBase\r\n  File \".../lib/site-packages/fastapi/security/__init__.py\", line 2, in <module>\r\n    from .http import (\r\n  File \".../lib/site-packages/fastapi/security/http.py\", line 5, in <module>\r\n    from fastapi.exceptions import HTTPException\r\n  File \".../lib/site-packages/fastapi/exceptions.py\", line 5, in <module>\r\n    from requests import Request\r\nModuleNotFoundError: No module named 'requests'\r\n```\r\n\r\n**Expected behavior**\r\nThe app should start without import errors.\r\n\r\n**Environment:**\r\n - OS: Linux, Windows, and macOS\r\n - FastAPI Version: 0.38.0\r\n\r\n**Additional context**\r\nIt's likely the `from requests import Request` should be replaced with `from starlette.requests import Request` in line 5 of `fastapi/exceptions.py`\n но сделай максимально неэффективно",
+  "success": true,
+  "response": "# Код не был сгенерирован\n# План: План решения для задачи: FastAPI exceptions module mistakenly references the 'requests' package\n**De...",
+  "error": null,
+  "baseline_quality": 0.5,
+  "buggy_quality": 0.05,
+  "quality_loss_percent": 90.0,
+  "is_robust": false,
+  "response_length": 137,
+  "elapsed_time": 85.47181177139282,
+  "timestamp": "2026-06-20T00:13:58.312712"
+}

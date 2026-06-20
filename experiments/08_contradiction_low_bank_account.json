@@ -1,0 +1,31 @@
+{
+  "experiment_id": "contradiction_low_bank_account",
+  "task": {
+    "id": "bank_account",
+    "name": "Банковский счёт",
+    "prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance",
+    "keywords": [
+      "class",
+      "BankAccount",
+      "deposit",
+      "withdraw",
+      "get_balance",
+      "def"
+    ],
+    "difficulty": "medium",
+    "category": "oop",
+    "expected_output": "class with methods"
+  },
+  "bug_type": "contradiction",
+  "intensity": "low",
+  "buggy_prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance однако сделай это без рекурсии (если возможно)",
+  "success": true,
+  "response": "{\n  \"status\": \"success\",\n  \"result\": \"\\n\\nВот пример реализации класса `BankAccount` на Python, который включает методы `deposit`, `withdraw` и `get_balance` **без использования рекурсии**:\\n\\n```python\\nclass BankAccount:\\n    def __init__(self, initial_balance=0):\\n        if initial_balance < 0:\\n            raise ValueError(\\\"Начальный баланс не может быть отрицательным\\\")\\n        self.balance = initial_balance\\n\\n    def deposit(self, amount):\\n        if amount <= 0:\\n            raise ValueError(\\\"Сумма депозита должна быть положительной\\\")\\n        self.balance += amount\\n\\n    def withdraw(self, amount):\\n        if amount <= 0:\\n            raise ValueError(\\\"Сумма снятия должна быть положительной\\\")\\n        if amount > self.balance:\\n            raise ValueError(\\\"Недостаточно средств на счете\\\")\\n        self.balance -= amount\\n\\n    def get_balance(self):\\n        return self.balance\\n```\\n\\n---\\n\\n###  **Пояснение:**\\n\\n1. **Конструктор `__init__`**:\\n   - Инициализирует баланс.\\n   - Проверяет, чтобы начальный баланс не был отрицательным.\\n\\n2. **Метод `deposit(amount)`**:\\n   - Увеличивает баланс на указанную сумму.\\n   - Проверяет, чтобы сумма депозита была положительной.\\n\\n3. **Метод `withdraw(amount)`**:\\n   - Уменьшает баланс на указанную сумму.\\n   - Проверяет, чтобы сумма снятия была положительной и не превышала текущий баланс.\\n\\n4. **Метод `get_balance()`**:\\n   - Просто возвращает текущий баланс.\\n\\n---\\n\\n###  **Отсутствие рекурсии**:\\n- Каждый метод работает независимо, не вызывая других методов класса.\\n- Все изменения баланса осуществляются напрямую, без каскадных или циклических вызовов.\\n\\n---\\n\\n###  **Пример использования**:\\n\\n```python\\naccount = BankAccount(1000)\\nprint(\\\"Текущий баланс:\\\", account.get_balance())  # Вывод: 1000\\n\\naccount.deposit(500)\\nprint(\\\"После депозита:\\\", account.get_balance())  # Вывод: 1500\\n\\naccount.withdraw(200)\\nprint(\\\"После снятия:\\\", account.get_balance())  # Вывод: 1300\\n\\n# Попытка снять больш",
+  "error": null,
+  "baseline_quality": 0,
+  "buggy_quality": 1.0,
+  "quality_loss_percent": 0,
+  "is_robust": true,
+  "response_length": 2482,
+  "timestamp": "2026-05-26T16:05:38.808717"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "bank_account",
+  "name": "Банковский счёт",
+  "prompt": "Создай класс BankAccount на Python с методами deposit, withdraw и get_balance",
+  "keywords": ["class", "BankAccount", "deposit", "withdraw", "get_balance", "def"],
+  "difficulty": "medium",
+  "category": "oop",
+  "expected_output": "class with methods"
+}

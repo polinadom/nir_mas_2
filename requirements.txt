@@ -1,0 +1,15 @@
+# Ядро мультиагентной системы и эксперименты
+openai>=1.40           # клиент к LLM (OpenAI-совместимый API)
+python-dotenv>=1.0     # чтение конфигурации из .env
+httpx>=0.27            # HTTP-клиент (используется для прокси)
+tqdm>=4.66             # прогресс-бары
+
+# Визуализация результатов (visualize_results.py)
+matplotlib>=3.7
+
+# Генерация презентации (make_presentation.py)
+python-pptx>=0.6.21
+
+# Опционально: только для download_swe_bench.py (скачивание датасета SWE-bench).
+#   pip install datasets
+# datasets>=2.18
